@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VideoCourseController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +24,10 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+})->name('/');
+
+Route::controller(VideoCourseController::class)->group(function() {
+    Route::get('/kursus-video/{slug}', 'show')->name('videoCourse.show');
 });
 
 Route::get('/dashboard', function () {
