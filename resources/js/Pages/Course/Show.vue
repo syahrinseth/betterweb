@@ -1,7 +1,23 @@
 <script setup>
+import AkanDatang from '@/Components/AkanDatang.vue';
 import PublicLayout from '@/Layouts/PublicLayout.vue'
-import { ArrowLongLeftIcon, VideoCameraIcon, ClockIcon, CalendarIcon, TagIcon } from '@heroicons/vue/24/solid'
+import { ArrowLongLeftIcon, VideoCameraIcon, ClockIcon, CalendarIcon, TagIcon, StarIcon } from '@heroicons/vue/24/solid'
 import { Head, Link } from '@inertiajs/vue3';
+import moment from 'moment'
+import { reactive } from 'vue';
+import PremiumBadge from '@/Components/PremiumBadge.vue';
+
+const props = defineProps({
+    course: {
+        required: true,
+        type: Object
+    },
+    urlPrevious: {
+        required: false,
+        type: String
+    }
+})
+
 </script>
 
 <template>
@@ -10,32 +26,36 @@ import { Head, Link } from '@inertiajs/vue3';
         <PublicLayout>
             <section class="bg-white dark:text-white dark:bg-gray-900 max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:pt-28">
                 <div class="grid mb-10">
-                    <Link :href="route('/')" class="flex w-48 gap-2 text-xl dark:text-white items-center hover:dark:text-gray-400 hover:-translate-x-6 transition-all">
+                    <Link :href="urlPrevious" class="flex w-48 gap-2 text-xl dark:text-white items-center hover:dark:text-gray-400 hover:-translate-x-6 transition-all">
                         <ArrowLongLeftIcon class="h-8 w-8" />
-                        <p>Laman Utama</p>
+                        <p>Belakang</p>
                     </Link>
                 </div>
-                <div class="grid grid-cols-2 gap-10">
+                <div class="grid md:grid-cols-2 gap-10">
                     <div>
+                        <PremiumBadge v-if="course.data.premium"/>
+                        <p class="text-lg font-medium text-cyan-600 dark:text-cyan-500">Pembangunan Aplikasi Mobile</p>
                         <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl">
-                            Pembangunan Aplikasi Mobile Dengan Flutter Untuk Pemula
+                            {{ course.data.title }}
                         </h1>
                         <div class="flex gap-5 dark:text-gray-300">
-                            <div class="flex gap-1 items-center">
+                            <div class="flex gap-1 items-center text-xs md:text-md">
                                 <VideoCameraIcon class="h-6 w-6"/>
-                                16 pelajaran
+                                {{ course.data.lessons?.length || 0 }} pelajaran
                             </div>
-                            <div class="flex gap-1 items-center">
+                            <div v-if="course.data.lessons?.length" class="flex gap-1 items-center text-xs md:text-md">
                                 <ClockIcon class="h-6 w-6"/>
                                 1 Jam 15 Minit
                             </div>
-                            <div class="flex gap-1 items-center">
+                            <div v-if="course.data.published" class="flex gap-1 items-center text-xs md:text-md">
                                 <CalendarIcon class="h-6 w-6"/>
-                                Akan datang
+                                {{ moment(course.data.published).format('MMMM YYYY') }}
                             </div>
-                            <div class="flex gap-1 items-center">
-                                <TagIcon class="h-6 w-6"/>
-                                Flutter 3
+                            <div class="flex gap-1 items-center text-xs md:text-md">
+                                <template v-if="course.data.tags?.length > 0">
+                                    <TagIcon class="h-6 w-6"/>
+                                    {{ course.data.tags?.map(v => v.name)?.join(', ') }}
+                                </template>
                             </div>
                         </div>
                         <div class="my-10 border-b border-gray-700"></div>
@@ -43,34 +63,35 @@ import { Head, Link } from '@inertiajs/vue3';
                             <h1 class="mb-4 text-2xl font-extrabold leading-none tracking-tight ">
                                 Tentang Kursus Video
                             </h1>
-                            <p>Kursus ini mengandungi beberapa bahagian seperti berikut:</p>
-
+                            <p>
+                                {{ course.data.description }}
+                            </p>
                         </div>
                     </div>
                     <div>
-                        <div>
-                            <img alt="Thumbnail" fetchpriority="high" decoding="async" data-nimg="fill" class="h-72 w-full object-cover transition-all rounded-md mb-5" src="https://www.techrepublic.com/wp-content/uploads/2022/08/learn-coding-automation-just.jpeg" style="">
+                        <div v-if="course.data.medias?.length > 0">
+                            <img alt="Thumbnail" fetchpriority="high" decoding="async" data-nimg="fill" class="h-96 w-full object-cover transition-all rounded-md" :src="course.data.medias[0]?.original_url" style="">
                         </div>
-                        <div>
-                            <div>
-                                <h3 class="mb-2 dark:text-gray-300">Bahagian 1: Pengenalan Kepada Pembangunan Dengan Flutter</h3>
+                        <div class="py-10">
+                            <AkanDatang v-if="!course.data.published"></AkanDatang>
+                            <template v-else>
+                                <h3 class="mb-3 text-2xl font-bold text-gray-400 dark:text-gray-200">Pelajaran:</h3>
                                 <div>
                                     <ol style>
-                                        <li class="my-2">
-                                            <Link href="#" class="flex gap-5 items-center bg-gray-800 px-6 py-5 rounded-xl hover:bg-gray-700 hover:scale-105 transition-all">
+                                        <li v-for="lesson in course.data.lessons" class="my-4">
+                                            <Link href="#" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-800 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
                                                 <div>
-                                                    <div class="items-center flex justify-center bg-gray-600 w-14 h-14 rounded-full text-2xl font-extrabold">
-                                                        01
+                                                    <div class="items-center flex justify-center dark bg-gray-500 dark:bg-gray-600 w-14 h-14 rounded-full text-2xl font-extrabold text-white">
+                                                        {{ lesson.order }}
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h6 class="font-bold text-xl mb-2">Kenapa Flutter?</h6>
-                                                    <p class="text-gray-300 line-clamp-2 leading-5 mb-2 text-md">Memahami sebab-sebab untuk mengunakan flutter untuk pembangunan aplikasi mudah alih.</p>
-                                                    <div class="flex text-xs text-gray-300 items-center gap-2">
-                                                        <div class="uppercase">Pelajaran 1</div>
+                                                    <h6 class="font-bold text-xl mb-2">{{ lesson.title }}</h6>
+                                                    <p class="dark:text-gray-300 line-clamp-2 leading-5 mb-2 text-md">{{ lesson.description }}</p>
+                                                    <div class="flex text-xs dark:text-gray-300 items-center gap-2">
                                                         <div class="flex gap-1 items-center">
                                                             <ClockIcon class="h-3 w-3"/>
-                                                            1 Minit
+                                                            {{ lesson.video_length }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -78,8 +99,10 @@ import { Head, Link } from '@inertiajs/vue3';
                                         </li>
                                     </ol>
                                 </div>
-                            </div>
+                            </template>
                         </div>
+                        
+                        
                     </div>
                 </div>
             </section>

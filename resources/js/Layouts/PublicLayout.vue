@@ -4,8 +4,6 @@ import { Link } from '@inertiajs/vue3';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 
-
-
 let theme = window.theme;
 </script>
 
@@ -24,15 +22,15 @@ let theme = window.theme;
                             <a class="github-button" href="https://github.com/themesberg/landwind" data-size="large" data-icon="octicon-star" data-show-count="true" aria-label="Star themesberg/landwind on GitHub">Star</a>
                         </div> -->
                         <!-- <a href="#" class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Log in</a> -->
-                        <Link v-if="!$page.props.auth" :href="route('register')" class="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-cyan-600 dark:hover:bg-cyan-700 focus:outline-none dark:focus:ring-cyan-800">Daftar Sekarang</Link>
+                        <Link v-if="!$page.props?.auth?.user" :href="route('register')" class="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-cyan-600 dark:hover:bg-cyan-700 focus:outline-none dark:focus:ring-cyan-800">Daftar Sekarang</Link>
                         <Dropdown v-else align="right" width="48">
                             <template #trigger>
                                 <span class="inline-flex rounded-md">
                                     <button
                                         type="button"
-                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none transition ease-in-out duration-150"
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-200 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                     >
-                                        {{ $page.props.auth.user.name }}
+                                        {{ $page.props?.auth?.user?.name }}
 
                                         <svg
                                             class="ml-2 -mr-0.5 h-4 w-4"
@@ -51,6 +49,7 @@ let theme = window.theme;
                             </template>
 
                             <template #content>
+                                <!-- <DropdownLink :href="route('dashboard')"> Dashboard </DropdownLink> -->
                                 <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
                                 <DropdownLink :href="route('logout')" method="post" as="button">
                                     Log Out
@@ -68,15 +67,15 @@ let theme = window.theme;
                             <!-- <li>
                                 <a href="#" class="block py-2 pl-3 pr-4 text-white bg-cyan-700 rounded lg:bg-transparent lg:text-cyan-700 lg:p-0 dark:text-white" aria-current="page">Tentang Kami</a>
                             </li> -->
-                            <li>
+                            <!-- <li>
                                 <a href="#artikel" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-cyan-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Artikel</a>
-                            </li>
+                            </li> -->
                             <!-- <li>
                                 <a href="#" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-cyan-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Roadmap Pembangunan Aplikasi Mobile</a>
                             </li> -->
-                            <li>
+                            <!-- <li>
                                 <a href="#kursus-video" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-cyan-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Kursus Video</a>
-                            </li>
+                            </li> -->
                             <!-- <li>
                                 <a href="#contact" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-cyan-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Perkhidmatan</a>
                             </li> -->
@@ -93,7 +92,7 @@ let theme = window.theme;
         </div>
 
 
-        <footer class="bg-gray-50 dark:bg-gray-800">
+        <footer class="bg-white dark:bg-gray-900 xxxbg-gray-50 xxxdark:bg-gray-800">
             <div class="max-w-screen-xl p-4 py-6 mx-auto lg:py-16 md:p-8 lg:p-10">
                 <!-- <div class="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
                     <div>

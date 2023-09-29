@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CourseResource;
 use Inertia\Inertia;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
-class VideoCourseController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $courses = Course::with([
+            'tags',
+            'author'
+        ])->paginate(request()->input('per_page') ?? 10);
+
+        return Inertia::render('Course/Index', [
+            'courses' => CourseResource::collection($courses)
+        ]);
     }
 
     /**
@@ -36,7 +45,13 @@ class VideoCourseController extends Controller
      */
     public function show(string $slug)
     {
-        return Inertia::render('Course/Show');
+        $course = Course::with(['tags', 'author'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+            
+        return Inertia::render('Course/Show', [
+            'course' => (new CourseResource($course))
+        ]);
     }
 
     /**
