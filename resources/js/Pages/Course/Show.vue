@@ -1,7 +1,7 @@
 <script setup>
 import AkanDatang from '@/Components/AkanDatang.vue';
-import PublicLayout from '@/Layouts/PublicLayout.vue'
-import { ArrowLongLeftIcon, VideoCameraIcon, ClockIcon, CalendarIcon, TagIcon, StarIcon } from '@heroicons/vue/24/solid'
+import Layout from '@/Layouts/Layout.vue'
+import { ArrowLongLeftIcon, VideoCameraIcon, ClockIcon, CalendarIcon, TagIcon, StarIcon, LockClosedIcon } from '@heroicons/vue/24/solid'
 import { Head, Link } from '@inertiajs/vue3';
 import moment from 'moment'
 import { reactive } from 'vue';
@@ -23,8 +23,8 @@ const props = defineProps({
 <template>
     <div>
         <Head title="Kursus Video" />
-        <PublicLayout>
-            <section class="bg-white dark:text-white dark:bg-gray-900 max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:pt-28">
+        <Layout>
+            <section class="max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:pt-28">
                 <div class="grid mb-10">
                     <Link :href="urlPrevious" class="flex w-48 gap-2 text-xl dark:text-white items-center hover:dark:text-gray-400 hover:-translate-x-6 transition-all">
                         <ArrowLongLeftIcon class="h-8 w-8" />
@@ -35,7 +35,7 @@ const props = defineProps({
                     <div>
                         <PremiumBadge v-if="course.data.premium"/>
                         <p class="text-lg font-medium text-cyan-600 dark:text-cyan-500">Pembangunan Aplikasi Mobile</p>
-                        <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl">
+                        <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-gray-200">
                             {{ course.data.title }}
                         </h1>
                         <div class="flex gap-5 dark:text-gray-300">
@@ -78,15 +78,20 @@ const props = defineProps({
                                 <h3 class="mb-3 text-2xl font-bold text-gray-400 dark:text-gray-200">Pelajaran:</h3>
                                 <div>
                                     <ol style>
-                                        <li v-for="lesson in course.data.lessons" class="my-4">
-                                            <Link href="#" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-800 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
+                                        <li v-for="lesson, index in course.data.lessons" class="my-4">
+                                            <Link href="#" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-700 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
                                                 <div>
                                                     <div class="items-center flex justify-center dark bg-gray-500 dark:bg-gray-600 w-14 h-14 rounded-full text-2xl font-extrabold text-white">
-                                                        {{ lesson.order }}
+                                                        <template v-if="index >= 3 && course.data.premium">
+                                                            <LockClosedIcon class="w-5 h-5"/>
+                                                        </template>
+                                                        <template v-else>
+                                                            {{ lesson.order }}
+                                                        </template>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <h6 class="font-bold text-xl mb-2">{{ lesson.title }}</h6>
+                                                    <h6 class="font-bold text-xl mb-2 dark:text-gray-200">{{ lesson.title }}</h6>
                                                     <p class="dark:text-gray-300 line-clamp-2 leading-5 mb-2 text-md">{{ lesson.description }}</p>
                                                     <div class="flex text-xs dark:text-gray-300 items-center gap-2">
                                                         <div class="flex gap-1 items-center">
@@ -106,6 +111,6 @@ const props = defineProps({
                     </div>
                 </div>
             </section>
-        </PublicLayout>
+        </Layout>
     </div>
 </template>

@@ -21,7 +21,7 @@ class CourseResource extends JsonResource
             'slug' => $this->slug,
             'published' => $this->published,
             'medias' => $this->getMedia()->toArray(),
-            'lessons' => $this->lessons,
+            'lessons' => $this->lessons->sortBy('order')->all(),
             'tags' => $this->tags,
             'description' => $this->description,
             'premium' => $this->premium,

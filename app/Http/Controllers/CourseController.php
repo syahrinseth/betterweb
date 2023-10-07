@@ -45,7 +45,7 @@ class CourseController extends Controller
      */
     public function show(string $slug)
     {
-        $course = Course::with(['tags', 'author'])
+        $course = Course::with(['tags', 'author', 'lessons'])
             ->where('slug', $slug)
             ->firstOrFail();
             

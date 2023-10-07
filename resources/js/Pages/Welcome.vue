@@ -1,7 +1,12 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
-import PublicLayout from '@/Layouts/PublicLayout.vue';
+import { Head, Link, usePage } from '@inertiajs/vue3';
+import Layout from '@/Layouts/Layout.vue';
 import VideoCourseCard from '@/Components/VideoCourseCard.vue'
+import { computed } from 'vue';
+
+const page = usePage();
+
+const user = computed(() => page.props.auth.user);
 
 defineProps({
     canLogin: {
@@ -29,9 +34,9 @@ defineProps({
 <template>
     <Head title="Welcome" />
 
-    <PublicLayout>
+    <Layout>
         <!-- Start block -->
-        <section class="bg-white dark:bg-gray-900">
+        <section v-if="!user" class="bg-white dark:bg-gray-900">
             <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
                 <div class="mr-auto place-self-center lg:col-span-7">
                     <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
@@ -123,7 +128,7 @@ defineProps({
         </section> -->
         <!-- End block -->
         <!-- Start block -->
-        <section v-if="false" id="artikel" class="bg-gray-50 dark:bg-gray-800">
+        <section id="artikel" class="bg-gray-50 dark:bg-gray-800">
             <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:py-24 lg:px-6">
                 <div class="text-center">
                     <h2 class="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white capitalize">
@@ -175,7 +180,7 @@ defineProps({
                 </div>
             </div>
         </section>
-        <section id="kursus-video" class="bg-gray-50 dark:bg-gray-800 xxbg-white xxdark:bg-gray-900">
+        <section id="kursus-video" class="xxbg-gray-50 xxdark:bg-gray-800 bg-white dark:bg-gray-900">
             <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:py-16 lg:px-6">
                 <div class="text-center">
                     <h2 class="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
@@ -223,7 +228,7 @@ defineProps({
             </div>
         </section> -->
 
-    </PublicLayout>
+    </Layout>
 
     
 </template>

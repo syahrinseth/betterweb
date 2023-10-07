@@ -1,8 +1,8 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
 let theme = window.theme;
 </script>
@@ -12,10 +12,8 @@ let theme = window.theme;
         <header class="fixed w-full">
             <nav class="backdrop-blur-xl bg-white/30 border-gray-200 py-4 dark:bg-gray-900/30 dark:backdrop-blur-xl z-50">
                 <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-                    <Link :href="route('/')" class="flex items-center">
-                        <img v-if="theme" src="/images/betterweb-dark-logo.png" class="h-10 mr-3 sm:h-9" alt="Landwind Logo" />
-                        <img v-else src="/images/betterweb-light-logo.png" class="h-10 mr-3 sm:h-9" alt="Landwind Logo" />
-                        <!-- <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">betterweb</span> -->
+                    <Link href="/">
+                        <ApplicationLogo class="fill-current text-gray-500" />
                     </Link>
                     <div class="flex items-center lg:order-2">
                         <!-- <div class="hidden mt-2 mr-4 sm:inline-block">

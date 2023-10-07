@@ -8,6 +8,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MagicLinkLogin\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ use App\Http\Controllers\ProfileController;
 Route::get('/', function () {
     $courses = Course::with(['author', 'tags'])
         ->paginate(4);
-        
+
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
@@ -31,7 +32,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
         'courses' => CourseResource::collection($courses)
     ]);
-})->name('/');
+})->middleware(['guest'])->name('/');
 
 Route::controller(CourseController::class)->prefix('/kursus-video')->group(function() {
     Route::get('/', 'index')->name('videoCourse.index');
@@ -39,7 +40,16 @@ Route::controller(CourseController::class)->prefix('/kursus-video')->group(funct
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $courses = Course::with(['author', 'tags'])
+        ->paginate(4);
+
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+        'courses' => CourseResource::collection($courses)
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -48,4 +58,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware('guest')->controller(AuthController::class)->group(function() {
+    Route::get('login', 'create')->name('login');
+    Route::get('register', 'create')->name('register');
+    Route::post('login', 'store')->name('login.store');
+    Route::get('verify-login/{token}', 'verifyLogin')->name('login.verifyLogin');
+});
+
+Route::middleware('auth')->controller(AuthController::class)->group(function() {
+    Route::post('logout', 'logout')->name('logout');
+});
