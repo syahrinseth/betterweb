@@ -7,6 +7,7 @@ use App\Http\Resources\CourseResource;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MagicLinkLogin\AuthController;
 
@@ -37,6 +38,11 @@ Route::get('/', function () {
 Route::controller(CourseController::class)->prefix('/kursus-video')->group(function() {
     Route::get('/', 'index')->name('videoCourse.index');
     Route::get('/{slug}', 'show')->name('videoCourse.show');
+});
+
+Route::controller(LessonController::class)->prefix('/kursus-video/{slug}/pelajaran')->group(function() {
+    Route::get('/{id}', 'show')->name('lesson.show');
+    Route::get('/{id}/beli-kursus-video', 'showBuyVideoCourse')->name('lesson.showBuyVideoCourse');
 });
 
 Route::get('/dashboard', function () {

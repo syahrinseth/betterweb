@@ -8,5 +8,5 @@ Log Masuk
 </x-mail::button>
  
 Terima Kasih,<br>
-Syahrin @{{ config('app.name') }}
+Syahrin @ {{ config('app.name') }}
 </x-mail::message>

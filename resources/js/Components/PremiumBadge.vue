@@ -1,6 +1,6 @@
 <template>
-    <div class="flex gap-1 uppercase font-bold align-middle text-gray-800 dark:text-gray-200">
-        <StarIcon class="w-5 h-5 text-yellow-300"/> Premium
+    <div class="bg-gradient-to-r from-red-600 to-blue-400 inline-block text-transparent bg-clip-text uppercase font-extrabold text-lg tracking-wide">
+        Premium
     </div>
 </template>
 <script setup>
