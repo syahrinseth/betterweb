@@ -36,22 +36,29 @@ defineProps({
 
     <Layout>
         <!-- Start block -->
-        <section v-if="!user" class="bg-white dark:bg-gray-900">
+        <section class="bg-white dark:bg-gray-900">
             <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
                 <div class="mr-auto place-self-center lg:col-span-7">
-                    <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
-                        Dapatkan kursus video pembangunan aplikasi, <br/> secara percuma!
-                    </h1>
-                    <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                        10x kan kemampuan anda sebagai software developer di betterweb. 
-                        <br/>
-                        <template v-if="!$page.props.auth?.user">Daftar untuk dapatkan notifikasi kursus video pembangunan aplikasi setiap minggu.</template>
-                    </p>
+                    <template v-if="user">
+                        <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
+                            10x kan kemampuan anda sebagai software developer di betterweb. 
+                        </h1>
+                    </template>
+                    <template v-else>
+                        <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
+                            Dapatkan kursus video pembangunan aplikasi, <br/> secara percuma!
+                        </h1>
+                        <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+                            10x kan kemampuan anda sebagai software developer di betterweb. 
+                            <br/>
+                            Daftar untuk dapatkan notifikasi kursus video pembangunan aplikasi setiap minggu.
+                        </p>
+                    </template>
                     <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
                         <Link v-if="!$page.props.auth?.user" :href="route('register')" class="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-cyan-600 dark:hover:bg-cyan-700 focus:outline-none dark:focus:ring-cyan-800"> Daftar Sekarang 
                         </Link> 
                         <template v-else>
-                            <Link :href="route('videoCourse.index')" class="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-cyan-600 dark:hover:bg-cyan-700 focus:outline-none dark:focus:ring-cyan-800"> Kursus Video 
+                            <Link :href="route('course.index')" class="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-cyan-600 dark:hover:bg-cyan-700 focus:outline-none dark:focus:ring-cyan-800"> Kursus Video 
                             </Link> 
                             <Link href="#" class="text-white hover:text-gray-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:hover:text-gray-300 focus:outline-none dark:focus:ring-cyan-800"> Artikel 
                             </Link> 
@@ -142,7 +149,7 @@ defineProps({
                     <template v-for="post in [1, 2, 3, 4, 5, 6, 7, 8, 9]">
                         <div class="group cursor-pointer">
                             <div class="overflow-hidden rounded-md bg-gray-100 transition-all hover:scale-105 dark:bg-gray-800">
-                                <Link class="" :href="route('videoCourse.show', { slug: '1' })">
+                                <Link class="" :href="route('course.show', { slug: '1' })">
                                     <img alt="Thumbnail" fetchpriority="high" decoding="async" data-nimg="fill" class="object-cover transition-all rounded-md" src="https://www.techrepublic.com/wp-content/uploads/2022/08/learn-coding-automation-just.jpeg" style="">
                                 </Link>
                             </div>
@@ -154,13 +161,13 @@ defineProps({
                                         </a>
                                     </div>
                                     <h2 class="text-lg font-semibold leading-snug tracking-tight mt-2 dark:text-white">
-                                        <Link class="" :href="route('videoCourse.show', { slug: '1' })">
+                                        <Link class="" :href="route('course.show', { slug: '1' })">
                                             <span class="bg-gradient-to-r from-cyan-200 to-cyan-100 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_50%] dark:from-cyan-800 dark:to-cyan-900">Architectural Engineering Wonders of the modern era for your Inspiration</span>
                                         </Link>
                                     </h2>
                                     <div class="hidden">
                                         <p class="mt-2 line-clamp-3 text-sm text-gray-500 dark:text-gray-400">
-                                            <Link class="" :href="route('videoCourse.show', { slug: '1' })">Reinvention often comes in spurts, after a long period of silence. Just as modern architecture recently enjoyed a comeback, brand architecture, a field with well-established principles for decades</Link>
+                                            <Link class="" :href="route('course.show', { slug: '1' })">Reinvention often comes in spurts, after a long period of silence. Just as modern architecture recently enjoyed a comeback, brand architecture, a field with well-established principles for decades</Link>
                                         </p>
                                     </div>
                                     <div class="mt-3 flex items-center space-x-3 text-gray-500 dark:text-gray-400">
@@ -198,7 +205,7 @@ defineProps({
 
                 <div class="pt-6 mt-6 space-y-4 border-t border-gray-200 dark:border-gray-700">
                     <div class="text-center">
-                        <Link :href="route('videoCourse.index')" class="inline-flex items-center text-xl font-medium text-cyan-600 hover:text-cyan-800 dark:text-cyan-500 dark:hover:text-cyan-700">
+                        <Link :href="route('course.index')" class="inline-flex items-center text-xl font-medium text-cyan-600 hover:text-cyan-800 dark:text-cyan-500 dark:hover:text-cyan-700">
                             Lihat Semua
                             <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                         </Link>

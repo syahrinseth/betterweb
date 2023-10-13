@@ -16,9 +16,9 @@ const menuList = ref([
         active: route().current('/') || route().current('dashboard')
     },
     {
-        href: route('videoCourse.index'),
+        href: route('course.index'),
         label: 'Kursus Video',
-        active: route().current('videoCourse.index')
+        active: route().current('course.index')
     }
 ])
 </script>
@@ -172,7 +172,7 @@ const menuList = ref([
                         class="block w-auto fill-current text-gray-800"
                     />
                 </Link>
-                <span class="block text-sm text-center text-gray-500 dark:text-gray-400">© 2023 betterweb™. Dibangunkan dengan <a href="https://flowbite.com" class="text-cyan-600 hover:underline dark:text-cyan-500">Laravel</a> dan <a href="https://tailwindcss.com" class="text-cyan-600 hover:underline dark:text-cyan-500">Tailwind CSS</a>.
+                <span class="block text-sm text-center text-gray-500 dark:text-gray-400">© 2023 betterweb™. Dibangunkan dengan <a href="https://flowbite.com" class="text-cyan-600 hover:underline dark:text-cyan-500">Laravel</a> dan <a href="https://tailwindcss.com" class="text-cyan-600 hover:underline dark:text-cyan-500">Tailwind CSS</a> oleh <a href="https://twitter.com/syahrinseth" class="text-cyan-600 hover:underline dark:text-cyan-500">@syahrinseth</a>.
                 </span>
                 <!-- <ul class="flex justify-center mt-5 space-x-5">
                     <li>

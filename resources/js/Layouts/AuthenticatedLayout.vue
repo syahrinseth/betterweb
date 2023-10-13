@@ -16,9 +16,9 @@ const menuList = ref([
         active: route().current('dashboard')
     },
     {
-        href: route('videoCourse.index'),
+        href: route('course.index'),
         label: 'Kursus Video',
-        active: route().current('videoCourse.index')
+        active: route().current('course.index')
     }
 ])
 </script>

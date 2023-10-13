@@ -96,7 +96,7 @@ class AuthController extends Controller
         $token->consume();
         $token->user->verifyUser();
         Auth::login($token->user, remember: true);
-        return redirect('/dashboard');
+        return !empty($token->callback_url) ? redirect($token->callback_url) : redirect('/dashboard');
     }
 
     public function logout()

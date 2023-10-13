@@ -79,7 +79,7 @@ const props = defineProps({
                                 <div>
                                     <ol style>
                                         <li v-for="lesson, index in course.data.lessons" class="my-4">
-                                            <Link :href="route('lesson.show', { slug: course.data.slug, id: lesson.id })" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-700 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
+                                            <Link :href="route('course.lesson.show', { slug: course.data.slug, id: lesson.id })" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-700 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
                                                 <div>
                                                     <div class="items-center flex justify-center dark bg-gray-500 dark:bg-gray-600 w-14 h-14 rounded-full text-2xl font-extrabold text-white">
                                                         <template v-if="index >= 3 && course.data.premium">

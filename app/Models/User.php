@@ -66,7 +66,8 @@ class User extends Authenticatable
         $plaintext = Str::random(32);
         $token = $this->loginTokens()->create([
             'token' => hash('sha256', $plaintext),
-            'expires_at' => now()->addMinutes(15)
+            'expires_at' => now()->addMinutes(15),
+            'callback_url' => request('callback_url')
         ]);
         // Send email
         Mail::to($this->email)->queue(new MagicLinkLogin($plaintext, $token->expires_at));

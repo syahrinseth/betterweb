@@ -5,7 +5,9 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage, router } from '@inertiajs/vue3';
+
+const page = usePage();
 
 defineProps({
     status: {
@@ -16,11 +18,12 @@ defineProps({
 const form = useForm({
     email: '',
     remember: true,
+    callback_url: (new URLSearchParams(window.location.search))?.get('callback_url')
 });
 
 const submit = () => {
     form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+        onFinish: () => form.reset('email'),
     });
 };
 </script>
@@ -36,11 +39,12 @@ const submit = () => {
         <template v-if="!form.wasSuccessful">
             <form @submit.prevent="submit">
                 <div class="mt-2">
-                    <InputLabel for="email" value="Email" />
+                    <InputLabel for="email" value="Emel" />
 
                     <TextInput
                         id="email"
                         type="email"
+                        placeholder="Cth: ahmad@gmail.com"
                         class="mt-1 block w-full"
                         v-model="form.email"
                         required
@@ -60,7 +64,7 @@ const submit = () => {
             </form>
         </template>
         <template v-else>
-            <p>Sila klik pautan yang dihantar ke e-mel anda untuk menyelesaikan pendaftaran / log masuk.</p>
+            <p class="dark:text-gray-300 text-lg">Sila klik pautan yang dihantar ke emel anda untuk menyelesaikan pendaftaran / log masuk.</p>
         </template>
         
     </GuestLayout>

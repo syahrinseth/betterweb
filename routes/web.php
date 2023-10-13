@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseCourseController;
 use App\Http\Controllers\MagicLinkLogin\AuthController;
 
 /*
@@ -35,14 +36,18 @@ Route::get('/', function () {
     ]);
 })->middleware(['guest'])->name('/');
 
-Route::controller(CourseController::class)->prefix('/kursus-video')->group(function() {
-    Route::get('/', 'index')->name('videoCourse.index');
-    Route::get('/{slug}', 'show')->name('videoCourse.show');
+Route::controller(CourseController::class)->prefix('/kursus-video')->name('course.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{slug}', 'show')->name('show');
 });
 
-Route::controller(LessonController::class)->prefix('/kursus-video/{slug}/pelajaran')->group(function() {
-    Route::get('/{id}', 'show')->name('lesson.show');
-    Route::get('/{id}/beli-kursus-video', 'showBuyVideoCourse')->name('lesson.showBuyVideoCourse');
+Route::controller(LessonController::class)->prefix('/kursus-video/{slug}/pelajaran')->name('course.lesson.')->group(function() {
+    Route::get('/{id}', 'show')->name('show');
+});
+
+Route::controller(PurchaseCourseController::class)->prefix('/kursus-video/{slug}/purchase')->name('course.purchase.')->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::post('/', 'store')->name('store');
 });
 
 Route::get('/dashboard', function () {
