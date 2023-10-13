@@ -7,6 +7,7 @@ import moment from 'moment'
 import LessonCard from '@/Components/LessonCard.vue'
 import PremiumBadge from '@/Components/PremiumBadge.vue';
 import VideoScreen from '@/Components/VideoScreen.vue'
+import Border from '@/Components/Border.vue'
 
 const props = defineProps({
     course: {
@@ -29,8 +30,8 @@ const props = defineProps({
     <div>
         <Head title="Pelajaran" />
         <Layout>
-            <section class="max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:pt-28">
-                <div class="grid mb-10">
+            <section class="max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:pt-24">
+                <div class="grid mb-6">
                     <Link :href="urlPrevious" class="flex w-48 gap-2 text-xl dark:text-white items-center hover:dark:text-gray-400 hover:-translate-x-6 transition-all">
                         <ArrowLongLeftIcon class="h-8 w-8" />
                         <p>Belakang</p>
@@ -42,8 +43,8 @@ const props = defineProps({
                             :lesson="lesson.data"
                             :auth="$page.props.auth"
                         ></VideoScreen>
-                        <div class="my-10 border-b border-gray-700"></div>
-                        <PremiumBadge v-if="course.data.premium"/>
+                        <Border></Border>
+                        <PremiumBadge v-if="course.data.premium" class="text-2xl"/>
                         <p class="text-lg font-medium text-cyan-600 dark:text-cyan-500">{{ course.data.title }}</p>
                         <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-gray-200">
                             {{ lesson.data.title }}
@@ -68,7 +69,7 @@ const props = defineProps({
                                 </template>
                             </div>
                         </div>
-                        <div class="my-10 border-b border-gray-700"></div>
+                        <Border></Border>
                         <div class="dark:text-white mb-10">
                             <h1 class="mb-4 text-2xl font-extrabold leading-none tracking-tight ">
                                 Tentang Pelajaran

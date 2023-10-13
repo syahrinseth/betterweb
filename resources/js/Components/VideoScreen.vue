@@ -7,7 +7,7 @@
                     <TicketIcon class="h-44" />
                 </div>
                 <h3 class="col-span-3 text-4xl text-center font-bold">
-                    Kursus Video Premium
+                    Kursus Video <PremiumBadge class="text-4xl" />
                 </h3>
                 <p class="col-span-3 text-2xl text-center leading-6">
                     "Dengan harga lebih kurang kos hoodie uniqlo, anda akan mendapat akses kepada kursus video ini lengkap dengan video senang faham dan kod sumber pelajaran."
@@ -15,12 +15,11 @@
             </div>
             <div class="grid justify-items-stretch mt-5 gap-5">
                 <div class="justify-self-center flex gap-5">
-                    <Link :href="route('register')" class="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-cyan-600 dark:hover:bg-cyan-700 focus:outline-none dark:focus:ring-cyan-800"> Lihat Kesemua Pelajaran Dengan RM95 
+                    <Link :href="route('register')" class="text-white bg-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-cyan-600 dark:hover:bg-cyan-700 focus:outline-none dark:focus:ring-cyan-800 bg-gradient-to-r from-red-700 to-blue-500 transition duration-300 ease-in-out hover:scale-105"> Lihat Kesemua Pelajaran Dengan RM95 
                     </Link>
                     <Link v-if="!auth?.user" :href="route('register')" class="text-white bg-gray-500 hover:bg-gray-800 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-gray-600 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"> Log Masuk 
                     </Link>
                 </div>
-                
             </div>
         </div>
     </div>

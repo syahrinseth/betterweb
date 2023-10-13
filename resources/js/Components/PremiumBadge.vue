@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gradient-to-r from-red-600 to-blue-400 inline-block text-transparent bg-clip-text uppercase font-extrabold text-lg tracking-wide">
+    <div class="bg-gradient-to-r from-red-600 to-blue-400 inline-block text-transparent bg-clip-text uppercase font-extrabold tracking-wide">
         Premium
     </div>
 </template>
