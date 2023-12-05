@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PurchaseCourseController;
 use App\Http\Controllers\MagicLinkLogin\AuthController;
 
@@ -23,45 +24,44 @@ use App\Http\Controllers\MagicLinkLogin\AuthController;
 |
 */
 
-Route::get('/', function () {
-    $courses = Course::with(['author', 'tags'])
-        ->paginate(4);
-
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-        'courses' => CourseResource::collection($courses)
-    ]);
-})->middleware(['guest'])->name('/');
-
-Route::controller(CourseController::class)->prefix('/kursus-video')->name('course.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::get('/{slug}', 'show')->name('show');
+Route::domain('kelas.' . env('APP_URL'))->group(function() {
+    Route::get('/', function() {
+        abort(404);
+    })->middleware([]);
 });
 
-Route::controller(LessonController::class)->prefix('/kursus-video/{slug}/pelajaran')->name('course.lesson.')->group(function() {
-    Route::get('/{id}', 'show')->name('show');
+Route::domain(env('APP_URL'))->group(function() {
+    Route::get('/', function () {
+        $courses = Course::with(['author', 'tags'])
+            ->paginate(4);
+    
+        return Inertia::render('Welcome', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+            'courses' => CourseResource::collection($courses)
+        ]);
+    })->name('/');
+    
+    Route::controller(ServiceController::class)->prefix('/perkhidmatan')->name('service.')->group(function() {
+        Route::get('/', 'index')->name('index');
+    });
+    
+    Route::controller(CourseController::class)->prefix('/kursus-video')->name('course.')->group(function() {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{slug}', 'show')->name('show');
+    });
+    
+    Route::controller(LessonController::class)->prefix('/kursus-video/{slug}/pelajaran')->name('course.lesson.')->group(function() {
+        Route::get('/{id}', 'show')->name('show');
+    });
+    
+    Route::controller(PurchaseCourseController::class)->prefix('/kursus-video/{slug}/purchase')->name('course.purchase.')->group(function() {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+    });
 });
-
-Route::controller(PurchaseCourseController::class)->prefix('/kursus-video/{slug}/purchase')->name('course.purchase.')->group(function() {
-    Route::get('/', 'index')->name('index');
-    Route::post('/', 'store')->name('store');
-});
-
-Route::get('/dashboard', function () {
-    $courses = Course::with(['author', 'tags'])
-        ->paginate(4);
-
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-        'courses' => CourseResource::collection($courses)
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

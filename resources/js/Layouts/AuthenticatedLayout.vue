@@ -11,9 +11,9 @@ const showingNavigationDropdown = ref(false);
 
 const menuList = ref([
     {
-        href: route('dashboard'),
+        href: route('/'),
         label: 'Laman Utama',
-        active: route().current('dashboard')
+        active: route().current('/')
     },
     {
         href: route('course.index'),

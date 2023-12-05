@@ -41,7 +41,7 @@ defineProps({
                 <div class="mr-auto place-self-center lg:col-span-7">
                     <template v-if="user">
                         <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
-                            10x kan kemampuan anda sebagai software developer di betterweb. 
+                        10x kan kemampuan anda sebagai software developer di betterweb. 
                         </h1>
                     </template>
                     <template v-else>

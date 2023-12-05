@@ -13,12 +13,17 @@ const menuList = ref([
     {
         href: route('/'),
         label: 'Laman Utama',
-        active: route().current('/') || route().current('dashboard')
+        active: route().current('/')
     },
     {
         href: route('course.index'),
         label: 'Kursus Video',
         active: route().current('course.index')
+    },
+    {
+        href: route('service.index'),
+        label: 'Perkhidmatan',
+        active: route().current('service.index')
     }
 ])
 </script>
@@ -26,7 +31,7 @@ const menuList = ref([
 <template>
     <div>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-800">
-            <nav class="fixed w-full backdrop-blur-xl bg-white/30 border-gray-200 dark:bg-gray-900/30 dark:backdrop-blur-xl">
+            <nav class="isolate fixed w-full backdrop-blur-xl bg-white/30 border-gray-200 dark:bg-gray-900/30 dark:backdrop-blur-xl inset-x-0 top-0 z-50">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4">
                     <div class="flex justify-between h-16">
@@ -166,7 +171,7 @@ const menuList = ref([
                 <slot />
             </main>
 
-            <div class="text-center py-10">
+            <div class="isolate text-center py-10">
                 <Link :href="route('/')" class="flex items-center justify-center mb-5 text-2xl font-semibold text-gray-900 dark:text-white">
                     <ApplicationLogo
                         class="block w-auto fill-current text-gray-800"
