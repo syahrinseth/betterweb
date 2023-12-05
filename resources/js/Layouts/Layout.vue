@@ -16,14 +16,10 @@ const menuList = ref([
         active: route().current('/')
     },
     {
-        href: route('course.index'),
-        label: 'Kursus Video',
-        active: route().current('course.index')
-    },
-    {
-        href: route('service.index'),
-        label: 'Perkhidmatan',
-        active: route().current('service.index')
+        href: route('kelas.index'),
+        label: 'Kelas',
+        active: route().current('kelas.index'),
+        htmlLink: true
     }
 ])
 </script>
@@ -48,7 +44,7 @@ const menuList = ref([
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <template v-for="menu in menuList">
-                                    <NavLink :href="menu.href" :active="menu.active">
+                                    <NavLink :href="menu.href" :active="menu.active" :html-link="menu?.htmlLink">
                                         {{ menu.label }}
                                     </NavLink>
                                 </template>
@@ -134,7 +130,7 @@ const menuList = ref([
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <template v-for="menu in menuList">
-                            <ResponsiveNavLink :href="menu.href" :active="menu.active">
+                            <ResponsiveNavLink :href="menu.href" :active="menu.active" :html-link="menu?.htmlLink">
                                 {{ menu.label }}
                             </ResponsiveNavLink>
                         </template>

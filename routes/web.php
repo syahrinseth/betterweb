@@ -24,43 +24,50 @@ use App\Http\Controllers\MagicLinkLogin\AuthController;
 |
 */
 
-Route::domain('kelas.' . env('APP_URL'))->group(function() {
-    Route::get('/', function() {
-        abort(404);
-    })->middleware([]);
-});
+Route::domain('kelas.' . env('APP_URL'))
+    ->name('kelas.')
+    ->group(function() {
+        Route::get('/', function() {
+            abort(404);
+        })->name('index')->middleware([]);
+    });
 
 Route::domain(env('APP_URL'))->group(function() {
-    Route::get('/', function () {
-        $courses = Course::with(['author', 'tags'])
-            ->paginate(4);
+
+    Route::controller(HomeController::class)
+        ->group(function() {
+            Route::get('/', 'index')->name('/');
+        });
     
-        return Inertia::render('Welcome', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-            'laravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
-            'courses' => CourseResource::collection($courses)
-        ]);
-    })->name('/');
+    Route::controller(ServiceController::class)
+        ->prefix('/perkhidmatan')
+        ->name('service.')
+        ->group(function() {
+            Route::get('/', 'index')->name('index');
+        });
     
-    Route::controller(ServiceController::class)->prefix('/perkhidmatan')->name('service.')->group(function() {
-        Route::get('/', 'index')->name('index');
-    });
+    Route::controller(CourseController::class)
+        ->prefix('/kursus-video')
+        ->name('course.')
+        ->group(function() {
+            Route::get('/', 'index')->name('index');
+            Route::get('/{slug}', 'show')->name('show');
+        });
     
-    Route::controller(CourseController::class)->prefix('/kursus-video')->name('course.')->group(function() {
-        Route::get('/', 'index')->name('index');
-        Route::get('/{slug}', 'show')->name('show');
-    });
+    Route::controller(LessonController::class)
+        ->prefix('/kursus-video/{slug}/pelajaran')
+        ->name('course.lesson.')
+        ->group(function() {
+            Route::get('/{id}', 'show')->name('show');
+        });
     
-    Route::controller(LessonController::class)->prefix('/kursus-video/{slug}/pelajaran')->name('course.lesson.')->group(function() {
-        Route::get('/{id}', 'show')->name('show');
-    });
-    
-    Route::controller(PurchaseCourseController::class)->prefix('/kursus-video/{slug}/purchase')->name('course.purchase.')->group(function() {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-    });
+    Route::controller(PurchaseCourseController::class)
+        ->prefix('/kursus-video/{slug}/purchase')
+        ->name('course.purchase.')
+        ->group(function() {
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'store')->name('store');
+        });
 });
 
 Route::middleware('auth')->group(function () {
@@ -69,13 +76,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('guest')->controller(AuthController::class)->group(function() {
-    Route::get('login', 'create')->name('login');
-    Route::get('register', 'create')->name('register');
-    Route::post('login', 'store')->name('login.store');
-    Route::get('verify-login/{token}', 'verifyLogin')->name('login.verifyLogin');
-});
+Route::middleware('guest')
+    ->controller(AuthController::class)
+    ->group(function() {
+        Route::get('login', 'create')->name('login');
+        Route::get('register', 'create')->name('register');
+        Route::post('login', 'store')->name('login.store');
+        Route::get('verify-login/{token}', 'verifyLogin')->name('login.verifyLogin');
+    });
 
-Route::middleware('auth')->controller(AuthController::class)->group(function() {
-    Route::post('logout', 'logout')->name('logout');
-});
+Route::middleware('auth')
+    ->controller(AuthController::class)
+    ->group(function() {
+        Route::post('logout', 'logout')->name('logout');
+    });
