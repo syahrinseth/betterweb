@@ -24,11 +24,13 @@ use App\Http\Controllers\MagicLinkLogin\AuthController;
 |
 */
 
-Route::domain('kelas.' . env('APP_URL'))->group(function() {
-    Route::get('/', function() {
-        abort(404);
-    })->middleware([]);
-});
+Route::domain('kelas.' . env('APP_URL'))
+    ->name('kelas.')
+    ->group(function() {
+        Route::get('/', function() {
+            abort(404);
+        })->name('index')->middleware([]);
+    });
 
 Route::domain(env('APP_URL'))->group(function() {
 
