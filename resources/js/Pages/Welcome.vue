@@ -9,20 +9,6 @@ const page = usePage();
 const user = computed(() => page.props.auth.user);
 
 defineProps({
-    canLogin: {
-        type: Boolean,
-    },
-    canRegister: {
-        type: Boolean,
-    },
-    laravelVersion: {
-        type: String,
-        required: true,
-    },
-    phpVersion: {
-        type: String,
-        required: true,
-    },
     courses: {
         type: Array,
         required: true
