@@ -71,6 +71,12 @@ Before you begin, make sure you have the following installed on your system:
    php artisan migrate
    ```
 
+9. Generate Ziggy file
+
+    ```bash
+    php artisan ziggy:generate
+    ```
+
 ### Running the Application
 
 1. Start the development server:
