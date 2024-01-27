@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Mail\MagicLinkLogin;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -67,10 +68,14 @@ class User extends Authenticatable
         $token = $this->loginTokens()->create([
             'token' => hash('sha256', $plaintext),
             'expires_at' => now()->addMinutes(15),
-            'callback_url' => request('callback_url')
+            'callback_url' => !empty(request('callback_url')) ? request('callback_url') : (Route::is('kelas.*') ? route('kelas.index') : route('/'))
         ]);
         // Send email
-        Mail::to($this->email)->queue(new MagicLinkLogin($plaintext, $token->expires_at));
+        Mail::to($this->email)->queue(new MagicLinkLogin(
+            $plaintext,
+            $token->expires_at,
+            Route::is('kelas.*') ? 'kelas.login.verifyLogin' : 'login.verifyLogin'
+        ));
     }
 
     public function loginTokens()
