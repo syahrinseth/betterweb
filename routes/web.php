@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PurchaseCourseController;
 use App\Http\Controllers\MagicLinkLogin\AuthController;
+use App\Http\Controllers\Kelas\HomeController as KelasHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,33 @@ use App\Http\Controllers\MagicLinkLogin\AuthController;
 Route::domain('kelas.' . env('APP_URL'))
     ->name('kelas.')
     ->group(function() {
-        Route::get('/', function() {
-            abort(404);
-        })->name('index')->middleware([]);
+        
+        Route::controller(KelasHomeController::class)
+            ->group(function() {
+                Route::get('/', 'index')->name('index');
+            });
+
+        Route::middleware('auth')->group(function () {
+            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+            Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+            Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        });
+        
+        Route::middleware('guest')
+            ->controller(AuthController::class)
+            ->group(function() {
+                Route::get('login', 'create')->name('login');
+                Route::get('register', 'create')->name('register');
+                Route::post('login', 'store')->name('login.store');
+                Route::get('verify-login/{token}', 'verifyLogin')->name('login.verifyLogin');
+            });
+        
+        Route::middleware('auth')
+            ->controller(AuthController::class)
+            ->group(function() {
+                Route::post('logout', 'logout')->name('logout');
+            });
+        
     });
 
 Route::domain(env('APP_URL'))->group(function() {
@@ -68,25 +93,25 @@ Route::domain(env('APP_URL'))->group(function() {
             Route::get('/', 'index')->name('index');
             Route::post('/', 'store')->name('store');
         });
+
+        Route::middleware('auth')->group(function () {
+            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+            Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+            Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        });
+        
+        Route::middleware('guest')
+            ->controller(AuthController::class)
+            ->group(function() {
+                Route::get('login', 'create')->name('login');
+                Route::get('register', 'create')->name('register');
+                Route::post('login', 'store')->name('login.store');
+                Route::get('verify-login/{token}', 'verifyLogin')->name('login.verifyLogin');
+            });
+        
+        Route::middleware('auth')
+            ->controller(AuthController::class)
+            ->group(function() {
+                Route::post('logout', 'logout')->name('logout');
+            });
 });
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::middleware('guest')
-    ->controller(AuthController::class)
-    ->group(function() {
-        Route::get('login', 'create')->name('login');
-        Route::get('register', 'create')->name('register');
-        Route::post('login', 'store')->name('login.store');
-        Route::get('verify-login/{token}', 'verifyLogin')->name('login.verifyLogin');
-    });
-
-Route::middleware('auth')
-    ->controller(AuthController::class)
-    ->group(function() {
-        Route::post('logout', 'logout')->name('logout');
-    });

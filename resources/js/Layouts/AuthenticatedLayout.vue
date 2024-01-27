@@ -35,7 +35,7 @@ const menuList = ref([
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('/')">
                                     <ApplicationLogo
-                                        class="block w-auto fill-current text-gray-800"
+                                        class="block h-5 fill-current text-gray-800"
                                     />
                                 </Link>
                             </div>
