@@ -1,6 +1,6 @@
 <script setup>
 import AkanDatang from '@/Components/AkanDatang.vue';
-import Layout from '@/Layouts/Layout.vue'
+import KelasLayout from '@/Layouts/KelasLayout.vue'
 import { ArrowLongLeftIcon, VideoCameraIcon, ClockIcon, CalendarIcon, TagIcon, StarIcon, LockClosedIcon } from '@heroicons/vue/24/solid'
 import { Head, Link } from '@inertiajs/vue3';
 import moment from 'moment'
@@ -23,7 +23,7 @@ const props = defineProps({
 <template>
     <div>
         <Head title="Kursus Video" />
-        <Layout>
+        <KelasLayout>
             <section class="max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:pt-24">
                 <div class="grid mb-10">
                     <Link :href="urlPrevious" class="flex w-48 gap-2 text-xl dark:text-white items-center hover:dark:text-gray-400 hover:-translate-x-6 transition-all">
@@ -79,7 +79,7 @@ const props = defineProps({
                                 <div>
                                     <ol style>
                                         <li v-for="lesson, index in course.data.lessons" class="my-4">
-                                            <Link :href="route('course.lesson.show', { slug: course.data.slug, id: lesson.id })" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-700 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
+                                            <Link :href="route('kelas.course.lesson.show', { slug: course.data.slug, id: lesson.id })" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-700 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
                                                 <div>
                                                     <div class="items-center flex justify-center dark bg-gray-500 dark:bg-gray-600 w-14 h-14 rounded-full text-2xl font-extrabold text-white">
                                                         <template v-if="index >= 3 && course.data.premium">
@@ -111,6 +111,6 @@ const props = defineProps({
                     </div>
                 </div>
             </section>
-        </Layout>
+        </KelasLayout>
     </div>
 </template>

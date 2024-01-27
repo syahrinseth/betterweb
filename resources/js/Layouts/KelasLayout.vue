@@ -15,7 +15,13 @@ const menuList = ref([
         label: 'Laman Utama',
         active: route().current('kelas.index'),
         htmlLink: true
-    }
+    },
+    {
+        href: route('kelas.course.index'),
+        label: 'Kursus Video',
+        active: route().current('kelas.course.*'),
+        htmlLink: true
+    },
 ])
 </script>
 

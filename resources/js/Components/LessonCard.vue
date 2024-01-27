@@ -1,5 +1,5 @@
 <template>
-    <Link preserve-scroll :href="route('course.lesson.show', { slug: course.slug, id: lesson.id })" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-700 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
+    <Link preserve-scroll :href="route('kelas.course.lesson.show', { slug: course.slug, id: lesson.id })" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-700 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
         <div>
             <div class="items-center flex justify-center dark bg-gray-500 dark:bg-gray-600 w-14 h-14 rounded-full text-2xl font-extrabold text-white" :class="{ 'bg-red-500 dark:bg-red-500': active }">
                 <template v-if="lesson.is_premium">

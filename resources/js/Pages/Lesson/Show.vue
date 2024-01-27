@@ -1,6 +1,6 @@
 <script setup>
 import AkanDatang from '@/Components/AkanDatang.vue';
-import Layout from '@/Layouts/Layout.vue'
+import KelasLayout from '@/Layouts/KelasLayout.vue'
 import { ArrowLongLeftIcon, VideoCameraIcon, ClockIcon, CalendarIcon, TagIcon, StarIcon, LockClosedIcon } from '@heroicons/vue/24/solid'
 import { Head, Link } from '@inertiajs/vue3';
 import moment from 'moment'
@@ -29,7 +29,7 @@ const props = defineProps({
 <template>
     <div>
         <Head title="Pelajaran" />
-        <Layout>
+        <KelasLayout>
             <section class="max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:pt-24">
                 <div class="grid mb-6">
                     <Link :href="urlPrevious" class="flex w-48 gap-2 text-xl dark:text-white items-center hover:dark:text-gray-400 hover:-translate-x-6 transition-all">
@@ -114,6 +114,6 @@ const props = defineProps({
                     </div>
                 </div>
             </section>
-        </Layout>
+        </KelasLayout>
     </div>
 </template>
