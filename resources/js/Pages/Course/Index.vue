@@ -18,16 +18,16 @@ const props = defineProps({
         <Head title="Kursus Video" />
         <KelasLayout>
             <template #header>
-                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Kursus Video</h2>
-                <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-                    Kursus video bersiris tentang pembelajaran pembangunan aplikasi web dan mobile
+                <h2 class="font-extrabold text-4xl text-gray-800 dark:text-gray-200 leading-tight text-center">Kursus Video</h2>
+                <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400 text-center">
+                    Kursus video bersiris tentang pembelajaran koding dan pembangunan aplikasi software
                 </p>
             </template>
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-4">
                     <section id="kursus-video" class="bg-gray-50 dark:bg-gray-800">
                         <div class="max-w-screen-xl mx-auto">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                            <div class="grid grid-cols-1 md:grid-cols-1 gap-10">
                                 <div v-for="course in courses.data" class="group col-span-1 h-full">
                                     <VideoCourseCard :course="course"></VideoCourseCard>
                                 </div>

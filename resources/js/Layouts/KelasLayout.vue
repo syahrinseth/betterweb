@@ -157,7 +157,7 @@ const menuList = ref([
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white dark:bg-gray-800 shadow pt-16" v-if="$slots.header">
+            <header class="bg-white dark:bg-gray-800 pt-20" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4">
                     <slot name="header" />
                 </div>
