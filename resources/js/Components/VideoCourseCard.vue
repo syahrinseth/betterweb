@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-400/50 dark:bg-gray-700/50 rounded-xl p-6 md:p-12 mb-6">
+    <div class="bg-gray-300/50 dark:bg-gray-700/50 rounded-xl p-6 md:p-12 mb-6">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-6 lg:col-span-3 flex flex-col">
                 <PremiumBadge class="" v-if="course.premium"/>
