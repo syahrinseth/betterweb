@@ -1,19 +1,17 @@
 <script setup>
-import { Head, Link, usePage } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
 import KelasLayout from '@/Layouts/KelasLayout.vue';
-import VideoCourseCard from '@/Components/VideoCourseCard.vue'
 import { computed } from 'vue';
-import SectionTitle from '@/Components/SectionTitle.vue'
-import SectionPrimary from '@/Components/SectionPrimary.vue'
-import SectionSecondary from '@/Components/SectionSecondary.vue'
+import HeroSection from '@/Components/Kelas/HeroSection.vue';
+import CourseList from '@/Components/Kelas/CourseList.vue';
 
 const page = usePage();
 
 const user = computed(() => page.props.auth.user);
 
-defineProps({
+const props = defineProps({
     courses: {
-        type: Array,
+        type: Object,
         required: true
     }
 });
@@ -25,6 +23,16 @@ defineProps({
 
     <KelasLayout>
         <!-- Start block -->
+        <HeroSection/>
+        <div class="py-12">
+            <h2 class="font-extrabold text-4xl text-gray-800 dark:text-gray-200 leading-tight text-center">Kursus Video</h2>
+            <p class="mb-10 font-light text-gray-500 sm:text-lg dark:text-gray-400 text-center">
+                Kursus video bersiris tentang pembelajaran koding dan pembangunan aplikasi software
+            </p>
+            <CourseList
+                :courses="courses.data"
+            />
+        </div>
         <!-- End block -->
     </KelasLayout>
 

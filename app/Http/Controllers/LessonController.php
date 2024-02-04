@@ -46,7 +46,7 @@ class LessonController extends Controller
 
         $lesson = Lesson::findOrFail($id);
 
-        return Inertia::render('Lesson/Show', [
+        return Inertia::render('Kelas/Course/Lesson/Show', [
             'course' => new CourseResource($course),
             'lesson' => new LessonResource($lesson)
         ]);

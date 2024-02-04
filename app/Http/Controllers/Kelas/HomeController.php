@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CourseResource;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,7 @@ class HomeController extends Controller
             'featuredCourses' => fn () => Course::whereFeatured(true)
                 ->latest()
                 ->get(),
-            'courses' => fn () => Course::with(['tags', 'author', 'lessons'])->get(),
+            'courses' => fn () => CourseResource::collection(Course::with(['tags', 'author', 'lessons'])->get()),
         ]);
     }
 

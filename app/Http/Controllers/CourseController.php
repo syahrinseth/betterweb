@@ -19,7 +19,7 @@ class CourseController extends Controller
             'author'
         ])->paginate(request()->input('per_page') ?? 10);
 
-        return Inertia::render('Course/Index', [
+        return Inertia::render('Kelas/Course/Index', [
             'courses' => CourseResource::collection($courses)
         ]);
     }
@@ -49,7 +49,7 @@ class CourseController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
             
-        return Inertia::render('Course/Show', [
+        return Inertia::render('Kelas/Course/Show', [
             'course' => (new CourseResource($course))
         ]);
     }
