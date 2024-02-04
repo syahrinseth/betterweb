@@ -11,16 +11,17 @@ const showingNavigationDropdown = ref(false);
 
 const menuList = ref([
     {
-        href: route('/'),
-        label: 'Laman Utama',
-        active: route().current('/')
-    },
-    {
         href: route('kelas.index'),
-        label: 'Kelas',
+        label: 'Laman Utama',
         active: route().current('kelas.index'),
         htmlLink: true
-    }
+    },
+    {
+        href: route('kelas.course.index'),
+        label: 'Kursus Video',
+        active: route().current('kelas.course.*'),
+        htmlLink: true
+    },
 ])
 </script>
 
@@ -34,7 +35,7 @@ const menuList = ref([
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('/')">
+                                <Link :href="route('kelas.index')">
                                     <ApplicationLogo
                                         class="block h-5 fill-current text-gray-800"
                                     />
@@ -80,13 +81,13 @@ const menuList = ref([
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                                        <DropdownLink :href="route('logout')" method="post" as="button">
+                                        <DropdownLink :href="route('kelas.profile.edit')"> Profile </DropdownLink>
+                                        <DropdownLink :href="route('kelas.logout')" method="post" as="button">
                                             Log Out
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
-                                <Link v-else :href="route('register')" class="text-white bg-cyan-700 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-cyan-600 focus:outline-none dark:focus:ring-cyan-800">Daftar Sekarang</Link>
+                                <Link v-else :href="route('kelas.register')" class="text-white bg-cyan-700 focus:ring-cyan-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-cyan-600 focus:outline-none dark:focus:ring-cyan-800">Daftar Sekarang</Link>
                             </div>
                         </div>
 
@@ -146,8 +147,8 @@ const menuList = ref([
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button">
+                            <ResponsiveNavLink :href="route('kelas.profile.edit')"> Profile </ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('kelas.logout')" method="post" as="button">
                                 Log Out
                             </ResponsiveNavLink>
                         </div>
@@ -156,7 +157,7 @@ const menuList = ref([
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white dark:bg-gray-800 shadow pt-16" v-if="$slots.header">
+            <header class="bg-white dark:bg-gray-800 pt-20" v-if="$slots.header">
                 <div class="max-w-7xl mx-auto py-6 px-4">
                     <slot name="header" />
                 </div>
@@ -168,7 +169,7 @@ const menuList = ref([
             </main>
 
             <div class="isolate text-center py-10">
-                <Link :href="route('/')" class="flex items-center justify-center mb-5 text-2xl font-semibold text-gray-900 dark:text-white">
+                <Link :href="route('kelas.index')" class="flex items-center justify-center mb-5 text-2xl font-semibold text-gray-900 dark:text-white">
                     <ApplicationLogo
                         class="block h-5 fill-current text-gray-800"
                     />

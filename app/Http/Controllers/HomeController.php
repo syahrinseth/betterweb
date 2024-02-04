@@ -10,11 +10,6 @@ class HomeController extends Controller
 {
     public function index(): Response
     {
-        $courses = Course::with(['author', 'tags'])
-            ->paginate(4);
-            
-        return Inertia::render('Welcome', [
-            'courses' => $courses
-        ]);
+        return Inertia::render('Welcome');
     }
 }

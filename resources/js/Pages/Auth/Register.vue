@@ -14,9 +14,16 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
-    });
+    if (route().current('kelas.*')) {
+        form.post(route('kelas.register'), {
+            onFinish: () => form.reset('password', 'password_confirmation'),
+        });
+    } else {
+        form.post(route('register'), {
+            onFinish: () => form.reset('password', 'password_confirmation'),
+        });
+    }
+    
 };
 </script>
 

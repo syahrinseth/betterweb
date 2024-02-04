@@ -16,9 +16,9 @@ const menuList = ref([
         active: route().current('/')
     },
     {
-        href: route('course.index'),
+        href: route('kelas.course.index'),
         label: 'Kursus Video',
-        active: route().current('course.index')
+        active: route().current('kelas.course.index')
     }
 ])
 </script>
@@ -35,7 +35,7 @@ const menuList = ref([
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('/')">
                                     <ApplicationLogo
-                                        class="block w-auto fill-current text-gray-800"
+                                        class="block h-5 fill-current text-gray-800"
                                     />
                                 </Link>
                             </div>

@@ -1,22 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Kelas;
 
 use Inertia\Inertia;
 use App\Models\Course;
-use App\Models\Lesson;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\CourseResource;
-use App\Http\Resources\LessonResource;
 
-class LessonController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return Inertia::render('Kelas/Index', [
+            'featuredCourses' => fn () => Course::whereFeatured(true)
+                ->latest()
+                ->get(),
+            'courses' => fn () => CourseResource::collection(Course::with(['tags', 'author', 'lessons'])->get()),
+        ]);
     }
 
     /**
@@ -36,20 +40,11 @@ class LessonController extends Controller
     }
 
     /**
- * Display the specified resource.
+     * Display the specified resource.
      */
-    public function show(string $slug, int $id)
+    public function show(string $id)
     {
-        $course = Course::whereSlug($slug)
-            ->with('lessons')
-            ->firstOrFail();
-
-        $lesson = Lesson::findOrFail($id);
-
-        return Inertia::render('Kelas/Course/Lesson/Show', [
-            'course' => new CourseResource($course),
-            'lesson' => new LessonResource($lesson)
-        ]);
+        //
     }
 
     /**

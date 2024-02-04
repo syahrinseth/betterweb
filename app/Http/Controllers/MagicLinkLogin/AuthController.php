@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class AuthController extends Controller
 {
@@ -102,6 +103,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect(route('/'));
+        return redirect(Route::is('kelas.*') ? route('kelas.index') : route('/'));
     }
 }

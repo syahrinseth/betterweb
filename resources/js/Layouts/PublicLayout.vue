@@ -13,7 +13,7 @@ let theme = window.theme;
             <nav class="backdrop-blur-xl bg-white/30 border-gray-200 py-4 dark:bg-gray-900/30 dark:backdrop-blur-xl z-50">
                 <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
                     <Link href="/">
-                        <ApplicationLogo class="fill-current text-gray-500" />
+                        <ApplicationLogo class="fill-current h-5 text-gray-500" />
                     </Link>
                     <div class="flex items-center lg:order-2">
                         <!-- <div class="hidden mt-2 mr-4 sm:inline-block">

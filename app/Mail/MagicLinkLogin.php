@@ -16,14 +16,16 @@ class MagicLinkLogin extends Mailable
 
     public $plaintextToken;
     public $expiresAt;
+    public $verifyRouteName;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($plaintextToken, $expiresAt)
+    public function __construct($plaintextToken, $expiresAt, $verifyRouteName = 'login.verifyLogin')
     {
         $this->plaintextToken = $plaintextToken;
         $this->expiresAt = $expiresAt;
+        $this->verifyRouteName = $verifyRouteName;
     }
 
     /**
@@ -44,7 +46,7 @@ class MagicLinkLogin extends Mailable
         return new Content(
             markdown: 'emails.magic-login-link',
             with: [
-                'url' => URL::temporarySignedRoute('login.verifyLogin', $this->expiresAt, [
+                'url' => URL::temporarySignedRoute($this->verifyRouteName, $this->expiresAt, [
                     'token' => $this->plaintextToken
                 ])
             ]
