@@ -41,7 +41,11 @@ class LessonController extends Controller
     public function show(string $slug, int $id)
     {
         $course = Course::whereSlug($slug)
-            ->with('lessons')
+            ->with([
+                'sections' => [
+                    'lessons'
+                ]
+            ])
             ->firstOrFail();
 
         $lesson = Lesson::findOrFail($id);

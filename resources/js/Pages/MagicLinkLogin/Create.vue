@@ -70,7 +70,7 @@ const submit = () => {
             </form>
         </template>
         <template v-else>
-            <p class="dark:text-gray-300 text-lg">Sila klik pautan yang dihantar ke emel anda untuk menyelesaikan pendaftaran / log masuk.</p>
+            <p class="dark:text-gray-300 text-lg">Sila klik pautan yang dihantar ke emel awak untuk menyelesaikan pendaftaran / log masuk.</p>
         </template>
         
     </GuestLayout>

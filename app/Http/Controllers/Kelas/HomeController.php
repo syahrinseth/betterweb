@@ -19,7 +19,7 @@ class HomeController extends Controller
             'featuredCourses' => fn () => Course::whereFeatured(true)
                 ->latest()
                 ->get(),
-            'courses' => fn () => CourseResource::collection(Course::with(['tags', 'author', 'lessons'])->get()),
+            'courses' => fn () => CourseResource::collection(Course::with(['tags', 'author', 'sections' => ['lessons']])->get()),
         ]);
     }
 

@@ -10,7 +10,7 @@
                     Kursus Video <PremiumBadge class="text-4xl" />
                 </h3>
                 <p class="col-span-3 text-2xl text-center leading-6 text-gray-600 dark:text-gray-300">
-                    "Dengan harga lebih kurang kos hoodie uniqlo, anda akan mendapat akses kepada kursus video ini lengkap dengan video senang faham dan kod sumber pelajaran."
+                    "Dengan harga lebih kurang kos hoodie uniqlo, awak akan mendapat akses kepada kursus video ini lengkap dengan video senang faham dan kod sumber pelajaran."
                 </p>
             </div>
             <div class="grid justify-items-stretch mt-5 gap-5">

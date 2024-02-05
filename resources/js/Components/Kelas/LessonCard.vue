@@ -13,9 +13,9 @@
                 </template>
             </div>
         </div>
-        <div>
+        <div class="flex-1">
             <h6 class="font-bold text-xl mb-2 dark:text-gray-200">{{ lesson.title }}</h6>
-            <p class="dark:text-gray-300 line-clamp-2 leading-5 mb-2 text-md">{{ lesson.description }}</p>
+            <div class="dark:text-gray-300 line-clamp-2 leading-5 mb-2 text-md" v-html="lesson.description"></div>
             <div class="flex text-xs dark:text-gray-300 items-center gap-2">
                 <div class="flex gap-1 items-center">
                     <ClockIcon class="h-3 w-3"/>
@@ -36,10 +36,6 @@ const props = defineProps({
     },
     lesson: {
         required: true,
-        type: Object
-    },
-    auth: {
-        required: false,
         type: Object
     },
     active: {

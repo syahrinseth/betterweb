@@ -18,11 +18,7 @@
                         <img alt="author" fetchpriority="high" decoding="async" data-nimg="fill" class="object-cover aspect-[16/9] transition-all rounded-xl" :src="course.medias?.[0]?.original_url || 'https://www.techrepublic.com/wp-content/uploads/2022/08/learn-coding-automation-just.jpeg'" style=""/>
                     </Link>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 dark:text-gray-300 mt-5 lg:mt-0">
-                    <div class="flex gap-1 items-start md:items-center text-xs md:text-md ">
-                        <VideoCameraIcon class="h-6 w-6"/>
-                        {{ course.lessons?.length || 0 }} pelajaran
-                    </div>
+                <div class="flex gap-4 dark:text-gray-300 mt-5 lg:mt-0">
                     <div v-if="course.lessons?.length" class="flex gap-1 items-start md:items-center text-xs md:text-md">
                         <ClockIcon class="h-6 w-6"/>
                         1 Jam 15 Minit
@@ -38,9 +34,7 @@
                         </template>
                     </div>
                 </div>
-                <div class="font-light text-gray-500 sm:text-xl dark:text-gray-400 line-clamp-4 mt-5">
-                    {{ course.description }}
-                </div>
+                <div class="font-light text-gray-500 sm:text-xl dark:text-gray-400 line-clamp-4 mt-5" v-html="course.description"></div>
             </div>
             <div class="hidden lg:col-span-3 lg:flex justify-end">
                 <Link class="" :href="route('kelas.course.show', { slug: course.slug })">

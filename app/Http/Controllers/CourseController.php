@@ -16,7 +16,8 @@ class CourseController extends Controller
     {
         $courses = Course::with([
             'tags',
-            'author'
+            'author',
+            'sections'
         ])->paginate(request()->input('per_page') ?? 10);
 
         return Inertia::render('Kelas/Course/Index', [
@@ -45,7 +46,7 @@ class CourseController extends Controller
      */
     public function show(string $slug)
     {
-        $course = Course::with(['tags', 'author', 'lessons'])
+        $course = Course::with(['tags', 'author'])
             ->where('slug', $slug)
             ->firstOrFail();
             

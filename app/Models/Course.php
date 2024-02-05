@@ -31,9 +31,9 @@ class Course extends Model implements HasMedia
         return $this->belongsToMany(Tag::class, 'tag_course', 'course_id', 'tag_id');
     }
 
-    public function lessons()
+    public function sections()
     {
-        return $this->hasMany(Lesson::class, 'course_id', 'id');
+        return $this->hasMany(CourseSection::class);
     }
 
     public function toKebabCase($title = null) {

@@ -4,10 +4,11 @@ import KelasLayout from '@/Layouts/KelasLayout.vue'
 import { ArrowLongLeftIcon, VideoCameraIcon, ClockIcon, CalendarIcon, TagIcon, StarIcon, LockClosedIcon } from '@heroicons/vue/24/solid'
 import { Head, Link } from '@inertiajs/vue3';
 import moment from 'moment'
-import LessonCard from '@/Components/LessonCard.vue'
 import PremiumBadge from '@/Components/PremiumBadge.vue';
 import VideoScreen from '@/Components/VideoScreen.vue'
 import Border from '@/Components/Border.vue'
+import LessonCards from '@/Components/Kelas/LessonCards.vue';
+import HtmlViewer from '@/Components/HtmlViewer.vue';
 
 const props = defineProps({
     course: {
@@ -31,12 +32,6 @@ const props = defineProps({
         <Head title="Pelajaran" />
         <KelasLayout>
             <section class="max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:pt-24">
-                <div class="grid mb-6">
-                    <Link :href="urlPrevious" class="flex w-48 gap-2 text-xl dark:text-white items-center hover:dark:text-gray-400 hover:-translate-x-6 transition-all">
-                        <ArrowLongLeftIcon class="h-8 w-8" />
-                        <p>Belakang</p>
-                    </Link>
-                </div>
                 <div class="grid md:grid-cols-6 gap-10">
                     <div class="col-span-4">
                         <VideoScreen
@@ -50,10 +45,6 @@ const props = defineProps({
                             {{ lesson.data.title }}
                         </h1>
                         <div class="flex gap-5 dark:text-gray-300">
-                            <div class="flex gap-1 items-center text-xs md:text-md">
-                                <VideoCameraIcon class="h-6 w-6"/>
-                                pelajaran {{ lesson.data.order }}
-                            </div>
                             <div v-if="course.data.lessons?.length" class="flex gap-1 items-center text-xs md:text-md">
                                 <ClockIcon class="h-6 w-6"/>
                                 {{ lesson.data.video_length }}
@@ -70,45 +61,22 @@ const props = defineProps({
                             </div>
                         </div>
                         <Border></Border>
-                        <div class="dark:text-white mb-10">
-                            <h1 class="mb-4 text-2xl font-extrabold leading-none tracking-tight ">
-                                Tentang Pelajaran
-                            </h1>
-                            <p>
-                                {{ course.data.description }}
-                            </p>
-                        </div>
-                        <div class="dark:text-white mb-10">
-                            <h1 class="mb-4 text-2xl font-extrabold leading-none tracking-tight ">
-                                Perkara Yang Anda Akan Belajar
-                            </h1>
-                            <p>
-                                {{ course.data.description }}
-                            </p>
-                        </div>
-                        <div class="dark:text-white mb-10">
-                            <h1 class="mb-4 text-2xl font-extrabold leading-none tracking-tight ">
-                                FAQ
-                            </h1>
-                            <p>
-                                {{ course.data.description }}
-                            </p>
-                        </div>
+                        <HtmlViewer :text="lesson.data.description"/>
                     </div>
                     <div class="col-span-2">
                         <AkanDatang v-if="!course.data.published"></AkanDatang>
                         <template v-else>
                             <div class="h-full">
-                                <ol style>
-                                    <li v-for="value, index in course.data.lessons" class="mb-4">
-                                        <LessonCard
-                                            :auth="$page.props.auth"
-                                            :course="course.data"
-                                            :lesson="value"
-                                            :active="lesson.data.id == value.id"
-                                        ></LessonCard>
-                                    </li>
-                                </ol>
+                                <div v-for="(section, index) in course.data.sections" class="dark:text-white">
+                                    <h3 class="mb-2 text-md font-thin leading-none tracking-tight dark:text-gray-300">
+                                        Bahagian  {{index + 1}} : {{ section.name }}
+                                    </h3>
+                                    <LessonCards 
+                                        :course="course.data"
+                                        :lessons="section.lessons"
+                                        :active-lesson="lesson.data"
+                                    />
+                                </div>
                             </div>
                         </template>
                     </div>
