@@ -44,7 +44,7 @@ const props = defineProps({
                             </div>
                             <div v-if="course.data.published" class="flex gap-1 items-center text-xs md:text-md">
                                 <CalendarIcon class="h-6 w-6"/>
-                                {{ moment(course.data.published).isBefore() ? moment(course.data.published).format('Do MMMM YYYY') : 'Akan Datang' }}
+                                {{ moment(course.data.published).format('Do MMMM YYYY') }}
                             </div>
                             <div class="flex gap-1 items-center text-xs md:text-md">
                                 <template v-if="course.data.tags?.length > 0">
@@ -58,10 +58,10 @@ const props = defineProps({
                     </div>
                     <div>
                         <div v-if="course.data.medias?.length > 0">
-                            <img alt="Thumbnail" fetchpriority="high" decoding="async" data-nimg="fill" class="h-96 w-full object-cover transition-all rounded-md" :src="course.data.medias[0]?.original_url" style="">
+                            <img alt="Thumbnail" fetchpriority="high" decoding="async" data-nimg="fill" class="w-full object-cover transition-all rounded-md aspect-video drop-shadow-md" :src="course.data.medias[0]?.original_url" style="">
                         </div>
                         <div class="py-10">
-                            <h3 class="mb-3 text-2xl font-bold text-gray-400 dark:text-gray-200">Pelajaran:</h3>
+                            <h3 class="mb-3 text-2xl font-bold dark:text-gray-200">Pelajaran:</h3>
                             <div v-for="(section, index) in course.data.sections" class="dark:text-white">
                                 <h3 class="mb-2 text-md font-thin leading-none tracking-tight dark:text-gray-300">
                                     Bahagian  {{index + 1}} : {{ section.name }}

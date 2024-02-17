@@ -1,10 +1,10 @@
 <template>
-    <div class="bg-gradient-to-r from-gray-300 dark:from-gray-600 to-gray-400 dark:to-gray-700 inline-block w-full h-64 sm:h-[450px] rounded-2xl">
+    <div class="bg-gradient-to-r from-gray-200 dark:from-gray-600 to-gray-300 dark:to-gray-700 inline-block w-full h-64 sm:h-[450px] rounded-2xl aspect-video drop-shadow-md">
         <iframe v-if="!lesson.is_premium" class="rounded-2xl" width="100%" height="100%" src="https://www.youtube.com/embed/gzG_nV3Pd1c?si=gLvSDwkTCGynxIfr" :title="lesson.title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         <div v-else class="w-full p-10">
             <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 justify-items-center gap-2">
                 <div class="col-span-3">
-                    <TicketIcon class="h-44" />
+                    <VideoCameraIcon class="h-44" />
                 </div>
                 <h3 class="col-span-3 text-4xl text-center font-bold">
                     Kursus Video <PremiumBadge class="text-4xl" />
@@ -25,7 +25,7 @@
     </div>
 </template>
 <script setup>
-import { LockClosedIcon, TicketIcon } from '@heroicons/vue/24/solid';
+import { LockClosedIcon, TicketIcon, VideoCameraIcon } from '@heroicons/vue/24/solid';
 import PremiumBadge from'@/Components/PremiumBadge.vue';
 import { Link } from '@inertiajs/vue3';
 const props = defineProps({
