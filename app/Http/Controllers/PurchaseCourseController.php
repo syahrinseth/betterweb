@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CourseResource;
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Laravel\Cashier\Cashier;
+use App\Http\Resources\CourseResource;
 
 class PurchaseCourseController extends Controller
 {
@@ -17,58 +19,60 @@ class PurchaseCourseController extends Controller
      */
     public function index(String $slug)
     {
-        return Inertia::render('Purchase/Index', [
-            'course' => new CourseResource(
-                Course::whereSlug($slug)->firstOrFail()
-            )
+        $course = Course::whereSlug($slug)->firstOrFail();
+        $stripePriceId = $course->stripe_price_id;
+        $quantity = 1;
+
+        if (empty($stripePriceId)) {
+            return abort(403);
+        }
+
+        return request()->user()->checkout([$stripePriceId => $quantity], [
+            'success_url' => route('kelas.course.purchase.checkoutSuccess', [ 'slug' => $course->slug ]) . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('kelas.course.purchase.checkoutCancel', [ 'slug' => $course->slug ]),
+            'metadata' => ['course_id' => $course->id, 'user_id' => auth()->id()],
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function checkoutSuccess(String $slug)
     {
-        //
+        $sessionId = request()->get('session_id');
+
+        if ($sessionId === null) {
+            return abort(403);
+        }
+    
+        $session = Cashier::stripe()->checkout->sessions->retrieve($sessionId);
+
+        if ($session->payment_status !== 'paid') {
+            return abort(403);
+        }
+
+        $courseId = $session['metadata']['course_id'] ?? null;
+
+        $course = Course::findOrFail($courseId);
+
+        $user_id = $session['metadata']['user_id'] ?? null;
+
+        $course->purchasers()
+            ->attach(
+                User::find($user_id)
+            );
+
+        return Inertia::render('Kelas/Course/Checkout/Success', [
+            'course' => new CourseResource(Course::whereId(1)->first())
+        ]);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function checkoutCancel(String $slug)
     {
-        //
-    }
+        $course = Course::with(['tags', 'author'])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return Inertia::render('Kelas/Course/Checkout/Cancel', [
+            'course' => new CourseResource($course)
+        ]);
     }
 }

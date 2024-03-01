@@ -36,6 +36,7 @@ const props = defineProps({
                 <div class="grid md:grid-cols-6 gap-10">
                     <div class="col-span-4">
                         <VideoScreen
+                            :course="course.data"
                             :lesson="lesson.data"
                             :auth="$page.props.auth"
                         ></VideoScreen>

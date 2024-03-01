@@ -3,13 +3,17 @@
         <div>
             <div class="items-center flex justify-center dark bg-gray-500 dark:bg-gray-600 w-14 h-14 rounded-full text-2xl font-extrabold text-white" :class="{ 'bg-red-500 dark:bg-red-500': active }">
                 <template v-if="lesson.is_premium">
-                    <LockClosedIcon class="w-5 h-5"/>
-                </template>
-                <template v-else-if="active">
-                    <PlayIcon class="w-5 h-5"/>
+                    <template v-if="$page.props.auth?.user?.course_purchases?.filter((c) => c.id == course.id)?.length > 0">
+                        <PlayIcon v-if="active" class="w-5 h-5"/>
+                        <span v-else>{{ lesson.order }}</span>
+                    </template>
+                    <template v-else>
+                        <LockClosedIcon class="w-5 h-5"/>
+                    </template>
                 </template>
                 <template v-else>
-                    {{ lesson.order }}
+                    <PlayIcon v-if="active" class="w-5 h-5"/>
+                    <span v-else>{{ lesson.order }}</span>
                 </template>
             </div>
         </div>

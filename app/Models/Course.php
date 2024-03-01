@@ -54,4 +54,9 @@ class Course extends Model implements HasMedia
             ->fit(Manipulations::FIT_CROP, 300, 300)
             ->nonQueued();
     }
+
+    public function purchasers()
+    {
+        return $this->morphToMany(User::class, 'purchasable');
+    }
 }
