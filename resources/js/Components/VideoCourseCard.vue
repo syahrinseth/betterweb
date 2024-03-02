@@ -25,7 +25,7 @@
                     </div>
                     <div v-if="course.published" class="flex gap-1 items-start md:items-center text-xs md:text-md">
                         <CalendarIcon class="h-6 w-6"/>
-                        {{ moment(course.published).format('MMMM YYYY') }}
+                        {{ moment(course.published).format('Do MMMM YYYY') }}
                     </div>
                     <div class="flex gap-1 items-start md:items-center text-xs md:text-md">
                         <template v-if="course.tags?.length > 0">
@@ -38,7 +38,7 @@
             </div>
             <div class="hidden lg:col-span-3 lg:flex justify-end">
                 <Link class="" :href="route('kelas.course.show', { slug: course.slug })">
-                    <img alt="author" fetchpriority="high" decoding="async" data-nimg="fill" class="object-cover aspect-[16/9] transition-all rounded-xl" :src="course.medias?.[0]?.original_url || 'https://www.techrepublic.com/wp-content/uploads/2022/08/learn-coding-automation-just.jpeg'" style=""/>
+                    <img alt="author" fetchpriority="high" decoding="async" data-nimg="fill" class="object-cover aspect-[16/9] transition-all rounded-xl aspect-video drop-shadow-md" :src="course.medias?.[0]?.original_url || 'https://www.techrepublic.com/wp-content/uploads/2022/08/learn-coding-automation-just.jpeg'" style=""/>
                 </Link>
             </div>
         </div>

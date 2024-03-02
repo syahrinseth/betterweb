@@ -9,6 +9,7 @@ import VideoScreen from '@/Components/VideoScreen.vue'
 import Border from '@/Components/Border.vue'
 import LessonCards from '@/Components/Kelas/LessonCards.vue';
 import HtmlViewer from '@/Components/HtmlViewer.vue';
+import MoreContentSoon from '@/Components/Kelas/MoreContentSoon.vue';
 
 const props = defineProps({
     course: {
@@ -35,6 +36,7 @@ const props = defineProps({
                 <div class="grid md:grid-cols-6 gap-10">
                     <div class="col-span-4">
                         <VideoScreen
+                            :course="course.data"
                             :lesson="lesson.data"
                             :auth="$page.props.auth"
                         ></VideoScreen>
@@ -76,6 +78,7 @@ const props = defineProps({
                                         :lessons="section.lessons"
                                         :active-lesson="lesson.data"
                                     />
+                                    <MoreContentSoon/>
                                 </div>
                             </div>
                         </template>

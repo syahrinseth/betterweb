@@ -4,8 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Course;
+use App\Models\Purchase;
 use Illuminate\Support\Str;
 use App\Mail\MagicLinkLogin;
+use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +18,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -87,5 +90,10 @@ class User extends Authenticatable
     {
         $this->email_verified_at = now();
         $this->update();
+    }
+
+    public function coursePurchases()
+    {
+        return $this->morphedByMany(Course::class, 'purchasable');
     }
 }

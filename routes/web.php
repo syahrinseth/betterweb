@@ -54,7 +54,8 @@ Route::domain('kelas.' . env('APP_URL'))
             ->name('course.purchase.')
             ->group(function() {
                 Route::get('/', 'index')->name('index');
-                Route::post('/', 'store')->name('store');
+                Route::get('/checkout-success', 'checkoutSuccess')->name('checkoutSuccess');
+                Route::get('/checkout-cancel', 'checkoutCancel')->name('checkoutCancel');
             });
 
         Route::middleware('auth')->group(function () {
