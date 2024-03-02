@@ -1,6 +1,6 @@
 <template>
     <div class="bg-gradient-to-r from-gray-200 dark:from-gray-600 to-gray-300 dark:to-gray-700 inline-block w-full h-64 sm:h-[450px] rounded-2xl aspect-video drop-shadow-md">
-        <iframe v-if="(!lesson.is_premium) || auth?.user?.course_purchases?.filter((c) => c.id == course.id)?.length > 0" class="rounded-2xl" width="100%" height="100%" src="https://www.youtube.com/embed/gzG_nV3Pd1c?si=gLvSDwkTCGynxIfr" :title="lesson.title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe v-if="(!lesson.is_premium) || auth?.user?.course_purchases?.filter((c) => c.id == course.id)?.length > 0" class="rounded-2xl" width="100%" height="100%" :src="lesson.video_url" :title="lesson.title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; modestbranding=1; rel=0" allowfullscreen></iframe>
         <div v-else class="w-full p-10">
             <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 justify-items-center gap-2">
                 <div class="col-span-3">
