@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Course;
@@ -27,10 +28,11 @@ class PurchaseCourseController extends Controller
             return abort(403);
         }
 
-        return request()->user()->checkout([$stripePriceId => $quantity], [
+        return request()->user()->allowPromotionCodes()->checkout([$stripePriceId => $quantity], [
             'success_url' => route('kelas.course.purchase.checkoutSuccess', [ 'slug' => $course->slug ]) . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('kelas.course.purchase.checkoutCancel', [ 'slug' => $course->slug ]),
             'metadata' => ['course_id' => $course->id, 'user_id' => auth()->id()],
+            'submit_type' => now()->lte(Carbon::parse($course->published)) ? 'book' : 'pay'
         ]);
     }
 

@@ -6,7 +6,7 @@
                     <CalendarDaysIcon class="hidden md:block h-16 md:h-24 lg:h-36" />
                 </div>
                 <h3 class="col-span-3 text-lg md:text-4xl text-center font-bold">
-                    Anda sudah beli kursus video ini,
+                    Anda sudah beli kursus video ini,<br/>
                     standby pelajaran ini akan dilancarkan pada {{ purchasedDate.format('D MMMM YYYY') }}
                 </h3>
             </div>
