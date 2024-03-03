@@ -16,9 +16,6 @@ class HomeController extends Controller
     public function index()
     {
         return Inertia::render('Kelas/Index', [
-            'featuredCourses' => fn () => Course::whereFeatured(true)
-                ->latest()
-                ->get(),
             'courses' => fn () => CourseResource::collection(Course::with(['tags', 'author', 'sections' => ['lessons']])->get()),
         ]);
     }
