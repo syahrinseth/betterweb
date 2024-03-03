@@ -7,6 +7,7 @@ import PremiumBadge from '@/Components/PremiumBadge.vue';
 import HtmlViewer from '@/Components/HtmlViewer.vue';
 import LessonCards from '@/Components/Kelas/LessonCards.vue';
 import MoreContentSoon from '@/Components/Kelas/MoreContentSoon.vue';
+import CoursePurchaseButton from '@/Components/Kelas/CoursePurchaseButton.vue';
 
 const props = defineProps({
     course: {
@@ -53,8 +54,21 @@ const props = defineProps({
                                 </template>
                             </div>
                         </div>
+                        <div class="mt-6">
+                            <CoursePurchaseButton
+                                v-if="$page.props.auth?.user?.course_purchases?.filter((c) => c.id == course.data.id)?.length == 0 || $page.props.auth.user == null"
+                                :course="course.data"
+                            />
+                        </div>
                         <div class="my-10 border-b border-gray-700"></div>
                         <HtmlViewer :text="course.data.description"/>
+
+                        <div class="mt-6 text-center">
+                            <CoursePurchaseButton
+                                v-if="$page.props.auth?.user?.course_purchases?.filter((c) => c.id == course.data.id)?.length == 0 || $page.props.auth.user == null"
+                                :course="course.data"
+                            />
+                        </div>
                     </div>
                     <div>
                         <div v-if="course.data.medias?.length > 0">

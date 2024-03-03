@@ -15,7 +15,7 @@ import { Link } from '@inertiajs/vue3';
                 </div>
                 <div class="text-center">
                     <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-6xl">Kuasai Pembangunan Aplikasi dengan Kursus Video Kami</h1>
-                    <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Direka khas untuk pelajar dan junior developer, kursus kami akan melengkapkan awak dengan kemahiran yang diperlukan untuk mencipta aplikasi awak sendiri atau memulakan kerjaya sebagai software developer.</p>
+                    <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">Direka khas untuk pelajar dan junior developer, kursus kami akan melengkapkan anda dengan kemahiran yang diperlukan untuk mencipta aplikasi anda sendiri atau memulakan kerjaya sebagai software developer.</p>
                     <div class="mt-10 flex items-center justify-center gap-x-6">
                         <Link v-if="$page.props.auth.user == null" :href="route('kelas.register')" class="rounded-md bg-cyan-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600">Daftar Sekarang</Link>
                         <a :href="route('kelas.course.index')" class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-200">Kursus video kami <span aria-hidden="true">→</span></a>

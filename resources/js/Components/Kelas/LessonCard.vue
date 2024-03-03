@@ -21,7 +21,7 @@
             <h6 class="font-bold text-xl mb-2 dark:text-gray-200">{{ lesson.title }}</h6>
             <div class="dark:text-gray-300 line-clamp-2 leading-5 mb-2 text-md" v-html="lesson.description"></div>
             <div class="flex text-xs dark:text-gray-300 items-center gap-2">
-                <div class="flex gap-1 items-center">
+                <div v-show="lesson.video_length" class="flex gap-1 items-center">
                     <ClockIcon class="h-3 w-3"/>
                     {{ lesson.video_length }}
                 </div>
