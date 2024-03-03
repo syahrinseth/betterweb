@@ -26,7 +26,7 @@ return new class extends Migration
 
         Schema::table('lessons', function (Blueprint $table) {
             $table->foreignIdFor(CourseSection::class)->after('id');
-            $table->dropColumn('course_id');
+            $table->dropForeign(['course_id']);
         });
 
     }
@@ -38,7 +38,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('course_sections');
         Schema::table('lessons', function (Blueprint $table) {
-            $table->dropColumn('course_section_id');
+            $table->dropColumn(['course_section_id']);
         });
     }
 };
