@@ -33,8 +33,8 @@ const props = defineProps({
         <Head title="Pelajaran" />
         <KelasLayout>
             <section class="max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:pt-24">
-                <div class="grid md:grid-cols-6 gap-10">
-                    <div class="col-span-4">
+                <div class="grid grid-cols-1 lg:grid-cols-6 gap-10">
+                    <div class="col-span-1 lg:col-span-4">
                         <VideoScreen
                             :course="course.data"
                             :lesson="lesson.data"
@@ -65,7 +65,7 @@ const props = defineProps({
                         <Border></Border>
                         <HtmlViewer :text="lesson.data.description"/>
                     </div>
-                    <div class="col-span-2">
+                    <div class="col-span-1 lg:col-span-2">
                         <AkanDatang v-if="!course.data.published"></AkanDatang>
                         <template v-else>
                             <div class="h-full">

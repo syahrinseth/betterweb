@@ -38,7 +38,7 @@
             </div>
             <div class="hidden lg:col-span-3 lg:flex justify-end">
                 <Link class="" :href="route('kelas.course.show', { slug: course.slug })">
-                    <img alt="author" fetchpriority="high" decoding="async" data-nimg="fill" class="object-cover aspect-[16/9] transition-all rounded-xl aspect-video drop-shadow-md" :src="course.medias?.[0]?.original_url || 'https://www.techrepublic.com/wp-content/uploads/2022/08/learn-coding-automation-just.jpeg'" style=""/>
+                    <img alt="author" fetchpriority="high" decoding="async" data-nimg="fill" class="object-cover transition-all rounded-xl aspect-video drop-shadow-md" :src="course.medias?.[0]?.original_url || 'https://www.techrepublic.com/wp-content/uploads/2022/08/learn-coding-automation-just.jpeg'" style=""/>
                 </Link>
             </div>
         </div>
