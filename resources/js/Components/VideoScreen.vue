@@ -4,12 +4,12 @@
         <div v-else class="w-full p-10">
             <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 justify-items-center gap-2">
                 <div class="col-span-3">
-                    <VideoCameraIcon class="h-44" />
+                    <VideoCameraIcon class="hidden md:block h-16 md:h-24 lg:h-44" />
                 </div>
-                <h3 class="col-span-3 text-4xl text-center font-bold">
-                    Kursus Video <PremiumBadge class="text-4xl" />
+                <h3 class="col-span-3 md:text-4xl text-center font-bold">
+                    Kursus Video <PremiumBadge class="md:text-4xl" />
                 </h3>
-                <p class="col-span-3 text-2xl text-center leading-6 text-gray-600 dark:text-gray-300">
+                <p class="col-span-3 md:text-2xl text-center leading-6 text-gray-600 dark:text-gray-300">
                     "Dengan harga lebih kurang kos hoodie uniqlo, anda akan mendapat akses kepada kursus video ini lengkap dengan video senang faham dan kod sumber pelajaran."
                 </p>
             </div>

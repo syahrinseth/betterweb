@@ -62,12 +62,38 @@ const props = defineProps({
                         </div>
                         <div class="my-10 border-b border-gray-700"></div>
                         <HtmlViewer :text="course.data.description"/>
-
-                        <div class="mt-6 text-center">
-                            <CoursePurchaseButton
-                                v-if="$page.props.auth?.user?.course_purchases?.filter((c) => c.id == course.data.id)?.length == 0 || $page.props.auth.user == null"
-                                :course="course.data"
-                            />
+                        <div class="mt-6">
+                            <PremiumBadge v-if="course.data.premium" class="text-2xl"/>
+                            <p class="text-lg font-medium text-cyan-600 dark:text-cyan-500">Pembangunan Aplikasi Mudah Alih</p>
+                            <h1 class="max-w-2xl mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-3xl dark:text-gray-200">
+                                {{ course.data.title }}
+                            </h1>
+                            <div class="flex gap-5 dark:text-gray-300">
+                                <div v-if="false" class="flex gap-1 items-center text-xs md:text-md">
+                                    <VideoCameraIcon class="h-6 w-6"/>
+                                    {{ course.data.lessons?.length || 0 }} pelajaran
+                                </div>
+                                <div v-if="false" class="flex gap-1 items-center text-xs md:text-md">
+                                    <ClockIcon class="h-6 w-6"/>
+                                    1 Jam 15 Minit
+                                </div>
+                                <div v-if="course.data.published" class="flex gap-1 items-center text-xs md:text-md">
+                                    <CalendarIcon class="h-6 w-6"/>
+                                    {{ moment(course.data.published).format('Do MMMM YYYY') }}
+                                </div>
+                                <div class="flex gap-1 items-center text-xs md:text-md">
+                                    <template v-if="course.data.tags?.length > 0">
+                                        <TagIcon class="h-6 w-6"/>
+                                        {{ course.data.tags?.map(v => v.name)?.join(', ') }}
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <CoursePurchaseButton
+                                    v-if="$page.props.auth?.user?.course_purchases?.filter((c) => c.id == course.data.id)?.length == 0 || $page.props.auth.user == null"
+                                    :course="course.data"
+                                />
+                            </div>
                         </div>
                     </div>
                     <div>
