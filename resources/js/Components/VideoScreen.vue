@@ -1,6 +1,17 @@
 <template>
     <div class="bg-gradient-to-r from-gray-200 dark:from-gray-600 to-gray-300 dark:to-gray-700 inline-block w-full h-48 sm:h-[450px] rounded-2xl aspect-video drop-shadow-md">
-        <iframe v-if="(!lesson.is_premium) || auth?.user?.course_purchases?.filter((c) => c.id == course.id)?.length > 0" class="rounded-2xl" width="100%" height="100%" :src="lesson.video_url" :title="lesson.title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; modestbranding=1; rel=0" allowfullscreen></iframe>
+        <div v-if="((!lesson.is_premium) || authPurchased) && isNotLive" class="w-full p-10">
+            <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 justify-items-center gap-2">
+                <div class="col-span-3">
+                    <CalendarDaysIcon class="hidden md:block h-16 md:h-24 lg:h-36" />
+                </div>
+                <h3 class="col-span-3 text-lg md:text-4xl text-center font-bold">
+                    Anda sudah beli kursus video ini,
+                    standby pelajaran ini akan dilancarkan pada {{ purchasedDate.format('D MMMM YYYY') }}
+                </h3>
+            </div>
+        </div>
+        <iframe v-else-if="(!lesson.is_premium) || authPurchased" class="rounded-2xl" width="100%" height="100%" :src="lesson.video_url" :title="lesson.title" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; modestbranding=1; rel=0" allowfullscreen></iframe>
         <div v-else class="w-full p-10">
             <div class="grid grid-cols-3 text-gray-700 dark:text-gray-200 justify-items-center gap-2">
                 <div class="col-span-3">
@@ -24,10 +35,11 @@
     </div>
 </template>
 <script setup>
-import { LockClosedIcon, TicketIcon, VideoCameraIcon } from '@heroicons/vue/24/solid';
+import { VideoCameraIcon, CalendarDaysIcon } from '@heroicons/vue/24/solid';
 import PremiumBadge from'@/Components/PremiumBadge.vue';
-import { Link } from '@inertiajs/vue3';
 import CoursePurchaseButton from './Kelas/CoursePurchaseButton.vue';
+import moment from 'moment'
+
 const props = defineProps({
     course: {
         required: false,
@@ -43,4 +55,13 @@ const props = defineProps({
         type: Object
     }
 });
+
+const purchasedDate = moment(props.lesson.published);
+
+const now = moment();
+
+const isNotLive = now.diff(purchasedDate, 'days') < 0;
+
+const authPurchased = props.auth?.user?.course_purchases?.filter((c) => c.id == props.course.id)?.length > 0;
+
 </script>
