@@ -7,7 +7,7 @@
                 </div>
                 <h3 class="col-span-3 text-lg md:text-4xl text-center font-bold">
                     Anda sudah beli kursus video ini,<br/>
-                    standby pelajaran ini akan dilancarkan pada {{ purchasedDate.format('D MMMM YYYY') }}
+                    standby pelajaran ini akan dilancarkan pada {{ purchasedDate.format('D MMMM YYYY - hh:mm A') }}
                 </h3>
             </div>
         </div>
