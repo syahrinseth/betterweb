@@ -60,7 +60,7 @@ const purchasedDate = moment(props.lesson.published);
 
 const now = moment();
 
-const isNotLive = now.diff(purchasedDate, 'days') < 0;
+const isNotLive = now.diff(purchasedDate) < 0;
 
 const authPurchased = props.auth?.user?.course_purchases?.filter((c) => c.id == props.course.id)?.length > 0;
 
