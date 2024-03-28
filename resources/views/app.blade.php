@@ -34,6 +34,28 @@
             })();
         </script>
         <!--End of Tawk.to Script-->
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+            import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
 
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+            const firebaseConfig = {
+                apiKey: "AIzaSyDI6o1eGUQoP8q0Ab3TTaG9WUTiAUSki0s",
+                authDomain: "betterweb-99b09.firebaseapp.com",
+                projectId: "betterweb-99b09",
+                storageBucket: "betterweb-99b09.appspot.com",
+                messagingSenderId: "66171088389",
+                appId: "1:66171088389:web:72d320fa9484be75c4f66c",
+                measurementId: "G-4P171N4BN5"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const analytics = getAnalytics(app);
+        </script>
     </body>
 </html>
