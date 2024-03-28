@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@heroicons/vue": "^2.0.18",
+        "firebase": "^10.9.0",
         "moment": "^2.29.4"
     }
 }
