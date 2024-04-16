@@ -47,11 +47,11 @@ const props = defineProps({
                             {{ lesson.data.title }}
                         </h1>
                         <div class="flex gap-5 dark:text-gray-300">
-                            <div v-if="course.data.lessons?.length" class="flex gap-1 items-center text-xs md:text-md">
+                            <div v-if="lesson.data.video_length" class="flex gap-1 items-center text-xs md:text-md">
                                 <ClockIcon class="h-6 w-6"/>
-                                {{ lesson.data.video_length }}
+                                {{ moment(lesson.data.video_length, "HH:mm:ss").format('m') }}m {{ moment(lesson.data.video_length, "HH:mm:ss").format('ss') }}s
                             </div>
-                            <div v-if="course.data.published" class="flex gap-1 items-center text-xs md:text-md">
+                            <div v-if="lesson.data.published" class="flex gap-1 items-center text-xs md:text-md">
                                 <CalendarIcon class="h-6 w-6"/>
                                 {{ moment(lesson.data.published).format('DD MMMM YYYY') }}
                             </div>

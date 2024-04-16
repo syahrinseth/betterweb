@@ -26,7 +26,7 @@
             <div class="flex text-xs dark:text-gray-300 items-center gap-2">
                 <div v-show="lesson.video_length" class="flex gap-1 items-center">
                     <ClockIcon class="h-3 w-3"/>
-                    {{ lesson.video_length }}
+                    {{ moment(lesson.video_length, "HH:mm:ss").format('m') }}m {{ moment(lesson.video_length, "HH:mm:ss").format('ss') }}s
                 </div>
             </div>
         </div>
