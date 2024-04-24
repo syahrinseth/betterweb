@@ -22,13 +22,14 @@ class PurchaseCourseController extends Controller
     {
         $course = Course::whereSlug($slug)->firstOrFail();
         $stripePriceId = $course->stripe_price_id;
+        $stripePromoApiId = $course->stripe_promo_api_id;
         $quantity = 1;
 
         if (empty($stripePriceId)) {
             return abort(403);
         }
 
-        return request()->user()->allowPromotionCodes()->checkout([$stripePriceId => $quantity], [
+        return request()->user()->withPromotionCode($stripePromoApiId ?? null)->checkout([$stripePriceId => $quantity], [
             'success_url' => route('kelas.course.purchase.checkoutSuccess', [ 'slug' => $course->slug ]) . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('kelas.course.purchase.checkoutCancel', [ 'slug' => $course->slug ]),
             'metadata' => ['course_id' => $course->id, 'user_id' => auth()->id()],
