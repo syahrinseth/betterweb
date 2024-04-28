@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Course;
-use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
 use App\Http\Resources\CourseResource;
 
@@ -22,13 +21,14 @@ class PurchaseCourseController extends Controller
     {
         $course = Course::whereSlug($slug)->firstOrFail();
         $stripePriceId = $course->stripe_price_id;
+        $stripePromoApiId = !empty($course->stripe_promo_end_at) ? (Carbon::parse($course->stripe_promo_end_at)->isAfter(now()) ? $course->stripe_promo_api_id : null) : $course->stripe_promo_api_id;
         $quantity = 1;
 
         if (empty($stripePriceId)) {
             return abort(403);
         }
 
-        return request()->user()->allowPromotionCodes()->checkout([$stripePriceId => $quantity], [
+        return request()->user()->withPromotionCode($stripePromoApiId ?? null)->checkout([$stripePriceId => $quantity], [
             'success_url' => route('kelas.course.purchase.checkoutSuccess', [ 'slug' => $course->slug ]) . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('kelas.course.purchase.checkoutCancel', [ 'slug' => $course->slug ]),
             'metadata' => ['course_id' => $course->id, 'user_id' => auth()->id()],
