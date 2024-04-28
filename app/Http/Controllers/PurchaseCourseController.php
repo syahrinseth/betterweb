@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Course;
-use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
 use App\Http\Resources\CourseResource;
 
@@ -22,7 +21,7 @@ class PurchaseCourseController extends Controller
     {
         $course = Course::whereSlug($slug)->firstOrFail();
         $stripePriceId = $course->stripe_price_id;
-        $stripePromoApiId = $course->stripe_promo_api_id;
+        $stripePromoApiId = !empty($course->stripe_promo_end_at) ? (Carbon::parse($course->stripe_promo_end_at)->isAfter(now()) ? $course->stripe_promo_api_id : null) : $course->stripe_promo_api_id;
         $quantity = 1;
 
         if (empty($stripePriceId)) {
