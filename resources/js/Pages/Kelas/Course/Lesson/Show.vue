@@ -78,8 +78,8 @@ const props = defineProps({
                                         :lessons="section.lessons"
                                         :active-lesson="lesson.data"
                                     />
-                                    <MoreContentSoon/>
                                 </div>
+                                <MoreContentSoon/>
                             </div>
                         </template>
                     </div>
