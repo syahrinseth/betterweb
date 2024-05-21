@@ -20,20 +20,14 @@ class CourseLessonService
 
     public function publishedNotification(): bool
     {
-        try {
+        $lesson = Lesson::find($this->lesson->id);
 
-            $lesson = Lesson::find($this->lesson->id);
+        $receivers = User::whereHas('coursePurchases', function($q) use ($lesson) {
+            $q->where('purchasables.purchasable_id', $lesson->course_id)
+                ->where('purchasables.purchasable_type', Course::class);
+        })->get();
 
-            $receivers = User::whereHas('coursePurchases', function($q) use ($lesson) {
-                $q->where('purchasables.purchasable_id', $lesson->course_id)
-                    ->where('purchasables.purchasable_type', Course::class);
-            })->get();
-
-            Notification::sendNow($receivers, new NewLesson($lesson));
-
-        } catch (Exception $e) {
-            return false;
-        }
+        Notification::sendNow($receivers, new NewLesson($lesson));
 
         return true;
     }
