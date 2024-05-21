@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Course;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Lesson extends Model
 {
@@ -16,5 +17,10 @@ class Lesson extends Model
     public static function generateOrderNumber($course_id)
     {
         return static::where('course_id', $course_id)->count();
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 }
