@@ -24,7 +24,9 @@ class CourseResource extends JsonResource
             'stripe_promo_end_at' => $this->stripe_promo_end_at,
             'published' => $this->published,
             'medias' => $this->getMedia()->toArray(),
-            'sections' => $this->sections()->with(['lessons'])->get(),
+            'sections' => $this->sections()->with(['lessons' => function($q) {
+                $q->onlyPublished();
+            }])->get(),
             'tags' => $this->tags,
             'description' => $this->description,
             'premium' => $this->premium,
