@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CourseSection extends Model
 {
@@ -19,5 +20,10 @@ class CourseSection extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function completedItems(): MorphMany
+    {
+        return $this->morphMany(CompletedItem::class, 'completable');
     }
 }

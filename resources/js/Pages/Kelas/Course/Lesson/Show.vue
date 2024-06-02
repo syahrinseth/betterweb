@@ -65,10 +65,10 @@ const props = defineProps({
                         <Border></Border>
                         <HtmlViewer :text="lesson.data.description"/>
                     </div>
-                    <div class="col-span-1 lg:col-span-2">
+                    <div class="col-span-1 lg:col-span-2 h-screen overflow-y-scroll dark:scrollbar-thumb:!bg-slate-500/50 dark:scrollbar-track:!bg-slate-500/[0.16] flex-none lg:supports-scrollbars:pr-2 md:px-0 min-w-full overflow-hidden scrollbar-thumb:!bg-slate-300 scrollbar-thumb:!rounded scrollbar-track:!bg-slate-100 scrollbar-track:!rounded scrollbar:!h-1.5 scrollbar:!w-1.5 scrollbar:bg-transparent sm:px-6">
                         <AkanDatang v-if="!course.data.published"></AkanDatang>
                         <template v-else>
-                            <div class="h-full">
+                            <div class="h-full px-4">
                                 <div v-for="(section, index) in course.data.sections" class="dark:text-white">
                                     <h3 v-show="section.lessons.length > 0" class="mb-2 text-md font-thin leading-none tracking-tight dark:text-gray-300">
                                         Bahagian  {{index + 1}} : {{ section.name }}

@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateLessonRequest;
 use Inertia\Inertia;
 use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\LessonResource;
+use App\Services\CourseLessonService;
 
 class LessonController extends Controller
 {
+    public CourseLessonService $service;
+
+    public function __construct()
+    {
+        $this->service = new CourseLessonService(request('id'));
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -67,9 +76,19 @@ class LessonController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateLessonRequest $request, string $id)
     {
-        //
+        $validated = $request->validated();
+
+        if (!empty($validated['completed'])) {
+            if ($validated['completed'] == true) {
+                $this->service->markAsComplete();
+            } else {
+                $this->service->markAsIncomplete();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Success');
     }
 
     /**

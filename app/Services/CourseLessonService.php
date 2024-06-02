@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Exception;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Lesson;
@@ -15,12 +14,12 @@ class CourseLessonService
     
     public function __construct($lesson_id)
     {
-        $this->lesson = Lesson::find($lesson_id);
+        $this->lesson = Lesson::findOrFail($lesson_id);
     }
 
     public function publishedNotification(): bool
     {
-        $lesson = Lesson::find($this->lesson->id);
+        $lesson = $this->lesson;
 
         $receivers = User::whereHas('coursePurchases', function($q) use ($lesson) {
             $q->where('purchasables.purchasable_id', $lesson->course_id)
@@ -28,6 +27,39 @@ class CourseLessonService
         })->get();
 
         Notification::sendNow($receivers, new NewLesson($lesson));
+
+        return true;
+    }
+
+    public function markAsComplete(): bool
+    {
+
+        if ($this->lesson->completedItems()->where('user_id', auth()->id())->exists()) {
+            return false;
+        } elseif (empty(auth()->id())) {
+            return false;
+        }
+
+        $this->lesson->completedItems()
+            ->create([
+                'exp_earn' => $this->lesson->exp ?? 0,
+                'user_id' => auth()->id()
+            ]);
+
+        return true;
+    }
+
+    public function markAsIncomplete(): bool
+    {
+        if (!$this->lesson->completedItems()->where('user_id', auth()->id())->exists()) {
+            return false;
+        } elseif (empty(auth()->id())) {
+            return false;
+        }
+
+        $this->lesson->completedItems()
+            ->where('user_id', auth()->id())
+            ->delete();
 
         return true;
     }

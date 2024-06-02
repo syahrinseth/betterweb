@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Course;
+use App\Models\CompletedItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Lesson extends Model
 {
@@ -27,5 +29,10 @@ class Lesson extends Model
     public function scopeOnlyPublished($query)
     {
         return $query->whereNotNull('published');
+    }
+
+    public function completedItems(): MorphMany
+    {
+        return $this->morphMany(CompletedItem::class, 'completable');
     }
 }
