@@ -10,9 +10,9 @@
                         <PlayIcon v-if="active" class="w-5 h-5"/>
                         <span v-else>
                             <div v-if="lesson.completed">
-                                <CheckCircleIcon class="w-5 h-5" />
+                                <CheckCircleIcon class="w-10 h-10 text-cyan-300" />
                             </div>
-                            <div>
+                            <div v-else>
                                 {{ lesson.order }}
                             </div>
                         </span>
@@ -23,7 +23,14 @@
                 </template>
                 <template v-else>
                     <PlayIcon v-if="active" class="w-5 h-5"/>
-                    <span v-else>{{ lesson.order }}</span>
+                    <span v-else>
+                        <div v-if="lesson.completed">
+                            <CheckCircleIcon class="w-10 h-10 text-cyan-300" />
+                        </div>
+                        <div v-else>
+                            {{ lesson.order }}
+                        </div>
+                    </span>
                 </template>
             </div>
         </div>
