@@ -16,6 +16,13 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            extend: {
+                colors: {
+                    cyan: {
+                        300: '#67e8f9',
+                    },
+                }
+            },
         },
     },
 

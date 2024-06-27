@@ -8,7 +8,14 @@
                     </template>
                     <template v-else-if="$page.props.auth?.user?.course_purchases?.filter((c) => c.id == course.id)?.length > 0">
                         <PlayIcon v-if="active" class="w-5 h-5"/>
-                        <span v-else>{{ lesson.order }}</span>
+                        <span v-else>
+                            <div v-if="lesson.completed">
+                                <CheckCircleIcon class="w-5 h-5" />
+                            </div>
+                            <div>
+                                {{ lesson.order }}
+                            </div>
+                        </span>
                     </template>
                     <template v-else>
                         <LockClosedIcon class="w-5 h-5"/>
@@ -33,7 +40,7 @@
     </Link>
 </template>
 <script setup>
-import { ClockIcon, LockClosedIcon, PlayIcon } from '@heroicons/vue/24/solid'
+import { ClockIcon, LockClosedIcon, PlayIcon, CheckCircleIcon } from '@heroicons/vue/24/solid'
 import { Link } from '@inertiajs/vue3';
 import moment from 'moment'
 

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\LessonResource;
 use App\Services\CourseLessonService;
+use App\Http\Resources\CourseSectionResource;
 
 class LessonController extends Controller
 {
@@ -57,11 +58,14 @@ class LessonController extends Controller
             ])
             ->firstOrFail();
 
-        $lesson = Lesson::findOrFail($id);
+        $lesson = Lesson::with(['completedItems' => function($q) {
+            $q->where('user_id', auth()?->id());
+        }, 'section'])->findOrFail($id);
 
         return Inertia::render('Kelas/Course/Lesson/Show', [
             'course' => new CourseResource($course),
-            'lesson' => new LessonResource($lesson)
+            'sections' => CourseSectionResource::collection($course->sections),
+            'lesson' => new LessonResource($lesson),
         ]);
     }
 
@@ -80,7 +84,7 @@ class LessonController extends Controller
     {
         $validated = $request->validated();
 
-        if (!empty($validated['completed'])) {
+        if (isset($validated['completed'])) {
             if ($validated['completed'] == true) {
                 $this->service->markAsComplete();
             } else {

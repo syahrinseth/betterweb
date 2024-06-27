@@ -10,6 +10,11 @@ class CompletedItem extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'exp_earn'
+    ];
+
     public function imageable(): MorphTo
     {
         return $this->morphTo();
