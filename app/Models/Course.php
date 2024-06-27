@@ -6,6 +6,7 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -58,5 +59,10 @@ class Course extends Model implements HasMedia
     public function purchasers()
     {
         return $this->morphToMany(User::class, 'purchasable');
+    }
+
+    public function completedItems(): MorphMany
+    {
+        return $this->morphMany(CompletedItem::class, 'completable');
     }
 }

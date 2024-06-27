@@ -1,5 +1,5 @@
 <template>
-    <Link preserve-scroll :href="route('kelas.course.lesson.show', { slug: course.slug, id: lesson.id })" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-700 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
+    <Link :preserve-scroll="true" :preserve-state="true" :href="route('kelas.course.lesson.show', { slug: course.slug, id: lesson.id })" class="flex gap-5 items-center bg-gray-200 dark:bg-gray-700 px-6 py-5 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 hover:scale-105 transition-all">
         <div>
             <div class="items-center flex justify-center dark bg-gray-500 dark:bg-gray-600 w-14 h-14 rounded-full text-2xl font-extrabold text-white" :class="{ 'bg-red-500 dark:bg-red-500': active }">
                 <template v-if="lesson.is_premium">
@@ -8,7 +8,14 @@
                     </template>
                     <template v-else-if="$page.props.auth?.user?.course_purchases?.filter((c) => c.id == course.id)?.length > 0">
                         <PlayIcon v-if="active" class="w-5 h-5"/>
-                        <span v-else>{{ lesson.order }}</span>
+                        <span v-else>
+                            <div v-if="lesson.completed">
+                                <CheckCircleIcon class="w-10 h-10 text-cyan-300" />
+                            </div>
+                            <div v-else>
+                                {{ lesson.order }}
+                            </div>
+                        </span>
                     </template>
                     <template v-else>
                         <LockClosedIcon class="w-5 h-5"/>
@@ -16,7 +23,14 @@
                 </template>
                 <template v-else>
                     <PlayIcon v-if="active" class="w-5 h-5"/>
-                    <span v-else>{{ lesson.order }}</span>
+                    <span v-else>
+                        <div v-if="lesson.completed">
+                            <CheckCircleIcon class="w-10 h-10 text-cyan-300" />
+                        </div>
+                        <div v-else>
+                            {{ lesson.order }}
+                        </div>
+                    </span>
                 </template>
             </div>
         </div>
@@ -33,7 +47,7 @@
     </Link>
 </template>
 <script setup>
-import { ClockIcon, LockClosedIcon, PlayIcon } from '@heroicons/vue/24/solid'
+import { ClockIcon, LockClosedIcon, PlayIcon, CheckCircleIcon } from '@heroicons/vue/24/solid'
 import { Link } from '@inertiajs/vue3';
 import moment from 'moment'
 

@@ -47,6 +47,7 @@ Route::domain('kelas.' . env('APP_URL'))
             ->name('course.lesson.')
             ->group(function() {
                 Route::get('/{id}', 'show')->name('show');
+                Route::put('/{id}', 'update')->name('update');
             });
 
         Route::controller(PurchaseCourseController::class)
