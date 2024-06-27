@@ -47,7 +47,7 @@ const props = defineProps({
                         <AkanDatang v-if="!course.data.published"></AkanDatang>
                         <template v-else>
                             <div class="h-full">
-                                <div v-for="(section, index) in course.data.sections" class="dark:text-white overflow">
+                                <div v-for="(section, index) in course.data.sections" class="dark:text-white overflow px-6">
                                     <h3 v-show="section.lessons.length > 0" class="mb-2 text-md font-thin leading-none tracking-tight dark:text-gray-300">
                                         Bahagian  {{index + 1}} : {{ section.name }}
                                     </h3>
