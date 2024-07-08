@@ -15,8 +15,36 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Kelas/Index', [
-            'courses' => fn () => CourseResource::collection(Course::with(['tags', 'author', 'sections' => ['lessons']])->get()),
+        if (empty(auth()->id())) {
+            return Inertia::render('Kelas/Index', [
+                'courses' => fn () => CourseResource::collection(
+                    Course::with(['tags', 'author', 'sections' => ['lessons']]
+                )->paginate(
+                    perPage: 15,
+                    columns: ['*'],
+                    pageName: 'courses'
+                )),
+            ]);
+        }
+        
+        return Inertia::render('Kelas/LamanUtama', [
+            'inProgress' => fn () => CourseResource::collection(
+                Course::with(['tags', 'author', 'sections.lessons.completedItems'])
+                    ->whereHas('sections.lessons.completedItems', function($query) {
+                        $query->where('user_id', auth()->id());
+                    })->paginate(
+                        perPage: 15,
+                        columns: ['*'],
+                        pageName: 'in_progress'
+                    )
+            ),
+            'courses' => fn () => CourseResource::collection(
+                Course::with(['tags', 'author', 'sections' => ['lessons']]
+            )->paginate(
+                perPage: 15,
+                columns: ['*'],
+                pageName: 'courses'
+            ))
         ]);
     }
 

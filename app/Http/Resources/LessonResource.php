@@ -17,7 +17,7 @@ class LessonResource extends JsonResource
         return array_merge(parent::toArray($request), [
             'previous_lesson' => $this->previousLesson(),
             'next_lesson' => $this->nextLesson(),
-            'completed' => $this->completedItems?->first() ? true : false,
+            'completed' => $this->completedItems?->where('user_id', auth()->id())?->first() ? true : false,
             'section' => $this->section
         ]);
     }

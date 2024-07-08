@@ -24,7 +24,7 @@ const props = defineProps({
     <KelasLayout>
         <!-- Start block -->
         <HeroSection/>
-        <div class="py-12">
+        <div class="py-12 max-w-7xl mx-auto sm:px-4">
             <h2 class="font-extrabold text-4xl text-gray-800 dark:text-gray-200 leading-tight text-center">Kursus Video</h2>
             <p class="mb-10 font-light text-gray-500 sm:text-lg dark:text-gray-400 text-center">
                 Kursus video bersiris tentang pembelajaran koding dan pembangunan aplikasi software
