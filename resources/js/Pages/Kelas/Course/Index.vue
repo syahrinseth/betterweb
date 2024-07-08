@@ -21,7 +21,7 @@ const props = defineProps({
                     Kursus video bersiris tentang pembelajaran koding dan pembangunan aplikasi software
                 </p>
             </template>
-            <div class="py-12">
+            <div class="py-12 max-w-7xl mx-auto sm:px-4">
                 <CourseList 
                     :courses="courses.data"
                 />
