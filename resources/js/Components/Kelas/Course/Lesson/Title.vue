@@ -12,19 +12,21 @@
             <div class="flex-1">
                 <PremiumBadge v-if="course.premium" class="text-2xl"/>
                 <p class="text-xs md:text-md font-medium text-cyan-600 dark:text-cyan-500 mb-2 md:mb-0">{{ course.title }}</p>
+                <!-- Mobile view title start -->
                 <div class="flex justify-between items-center">
                     <h1 class="max-w-lg mb-4 text-2xl font-extrabold leading-none tracking-tight md:text-3xl dark:text-gray-200">
                         {{ lesson.title }}
                     </h1>
-                    <div class="hidden lg:block">
+                    <div class="hidden lg:block" v-if="$page.props.auth?.user?.course_purchases?.filter((c) => c.id == course.id)?.length > 0">
                         <PrimaryButton type="button" @click="toggleComplete" class="flex gap-1 border-gray-300" :class="{ 'border-cyan-300 text-cyan-300 dark:text-cyan-500 dark:border-cyan-500': lessonCompleted }">
-                            <CheckCircleIcon class="h-4 w-4" /> <template v-if="!lessonCompleted">Tandai sebagai Selesai</template><template v-else>Selesai</template>
+                            <CheckCircleIcon class="h-4 w-4" /> <template v-if="!lessonCompleted">Tandai Sebagai Selesai</template><template v-else>Selesai</template>
                         </PrimaryButton>
                     </div>
                 </div>
-                <div class="flex flex-row-reverse mb-6 lg:mb-0 lg:hidden">
+                <!-- Mobile view title end -->
+                <div class="flex flex-row-reverse mb-6 lg:mb-0 lg:hidden" v-if="$page.props.auth?.user?.course_purchases?.filter((c) => c.id == course.id)?.length > 0">
                     <PrimaryButton type="button" @click="toggleComplete" class="flex gap-1" :class="{ 'border-cyan-300 text-cyan-300 dark:text-cyan-500 dark:border-cyan-500': lessonCompleted }">
-                        <CheckCircleIcon class="h-4 w-4" /> <template v-if="!lessonCompleted">Tandai sebagai Selesai</template><template v-else>Selesai</template>
+                        <CheckCircleIcon class="h-4 w-4" /> <template v-if="!lessonCompleted">Tandai Sebagai Selesai</template><template v-else>Selesai</template>
                     </PrimaryButton>
                 </div>
                 
