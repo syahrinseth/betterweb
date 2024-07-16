@@ -43,7 +43,7 @@ const props = defineProps({
                         />
                         <HtmlViewer :text="lesson.data.description"/>
                     </div>
-                    <div class="col-span-1 xl:col-span-2 h-screen overflow-y-scroll dark:scrollbar-thumb:!bg-slate-500/50 dark:scrollbar-track:!bg-slate-500/[0.16] flex-none lg:supports-scrollbars:pr-2 md:px-0 min-w-full overflow-hidden scrollbar-thumb:!bg-slate-300 scrollbar-thumb:!rounded scrollbar-track:!bg-slate-100 scrollbar-track:!rounded scrollbar:!h-1.5 scrollbar:!w-1.5 scrollbar:bg-transparent sm:px-6">
+                    <div class="col-span-1 xl:col-span-2 h-screen overflow-y-scroll dark:scrollbar-thumb:!bg-slate-500/50 dark:scrollbar-track:!bg-slate-500/[0.16] flex-none lg:supports-scrollbars:pr-2 md:px-0 overflow-hidden scrollbar-thumb:!bg-slate-300 scrollbar-thumb:!rounded scrollbar-track:!bg-slate-100 scrollbar-track:!rounded scrollbar:!h-1.5 scrollbar:!w-1.5 scrollbar:bg-transparent sm:px-6">
                         <AkanDatang v-if="!course.data.published"></AkanDatang>
                         <template v-else>
                             <div class="h-full">
