@@ -26,5 +26,11 @@ const clients = [
     {
         src: '/images/clients/LOE-Logo.png' 
     },
+    {
+        src: '/images/clients/LOGO_JGE-2024_LIGHT-W-COLOR.png' 
+    },
+    {
+        src: '/images/clients/ilmufy-LOGO.png' 
+    },
 ];
 </script>

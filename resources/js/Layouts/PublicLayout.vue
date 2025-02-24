@@ -182,7 +182,7 @@ let theme = window.theme;
                         <img v-if="theme" src="/images/betterweb-dark-logo.png" class="h-10 mr-3 sm:h-9" alt="Landwind Logo" />
                         <img v-else src="/images/betterweb-light-logo.png" class="h-10 mr-3 sm:h-9" alt="Landwind Logo" />
                     </a>
-                    <span class="block text-sm text-center text-gray-500 dark:text-gray-400">© 2024 betterweb™. Dibangunkan dengan <a href="https://flowbite.com" class="text-cyan-600 hover:underline dark:text-cyan-500">Laravel</a> dan <a href="https://tailwindcss.com" class="text-cyan-600 hover:underline dark:text-cyan-500">Tailwind CSS</a> oleh <a href="https://twitter.com/syahrinseth" class="text-cyan-600 hover:underline dark:text-cyan-500">@syahrinseth</a>.
+                    <span class="block text-sm text-center text-gray-500 dark:text-gray-400">© 2025 betterweb™. Dibangunkan dengan <a href="https://flowbite.com" class="text-cyan-600 hover:underline dark:text-cyan-500">Laravel</a> dan <a href="https://tailwindcss.com" class="text-cyan-600 hover:underline dark:text-cyan-500">Tailwind CSS</a> oleh <a href="https://twitter.com/syahrinseth" class="text-cyan-600 hover:underline dark:text-cyan-500">@syahrinseth</a>.
                     </span>
                     <!-- <ul class="flex justify-center mt-5 space-x-5">
                         <li>
